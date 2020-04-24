@@ -5,6 +5,15 @@
     <title></title>
 </head>
 <body>
-<h1>Hello World</h1>
+<a href="/post">Create new post</a>
+
+<h1>All Chapters</h1>
+
+<ul>
+    <th:block th:each="chapter : ${chapters}">
+        <li th:text="${chapter.title}"></li>
+    </th:block>
+</ul>
+
 </body>
 </html>
