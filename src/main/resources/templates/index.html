@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
+<head th:replace="fragments :: head">
 </head>
 <body>
-<a href="/post">Create new post</a>
+<a href="postcraft/post">Create new post</a>
 
 <h1>All Chapters</h1>
 
 <ul>
     <th:block th:each="chapter : ${chapters}">
-        <li th:text="${chapter.title}"></li>
+        <li class="chapter_title_in_list" th:text="${chapter.title}"></li>
+        <li th:text="${chapter.content}"></li>
+        <br><br>
     </th:block>
 </ul>
 

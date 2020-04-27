@@ -23,14 +23,5 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("post")
-    public String renderCreateChapterForm() {
-        return "/post";
-    }
 
-    @PostMapping("post")
-    public String processCreateChapterForm(@ModelAttribute Chapter newChapter, Model model) {
-        chapterRepository.save(newChapter);
-        return "redirect:";
-    }
 }
