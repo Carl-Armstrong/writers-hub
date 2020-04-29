@@ -4,12 +4,14 @@
 </head>
 <body>
 
+<div th:replace="fragments :: header-bar"></div>
 <h1>Create Post</h1>
 
 <form method="post" action="/postcraft/post">
     <input type="text" name="title">Title
     <br>
-    <input type="text" name="content">
+    <input type="textarea" name="content">
+    <br>
     <input type="submit" value="Post">
 </form>
 
