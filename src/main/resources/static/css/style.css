@@ -7,7 +7,7 @@
     background: transparent;
 }
 
-.chapter_title_in_list {
+.title_in_list {
     font-size: 25px;
 }
 
@@ -49,13 +49,17 @@ input[type=text] {
 
 input[type=textarea] {
     width: 75%;
-    height: 500px;
+    height: 100px;
     padding 12px 20px;
     box-sizing: border-box;
     border: 3px solid #ccc;
     border-radius: 4px;
     background-color: #f8f8f8;
     resize: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: initial;
 }
 
 input[type=submit] {
@@ -70,5 +74,13 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
-    background-color: skyblue;
+    background-color: #1565c0;
+}
+
+hr {
+    border: 2px solid deepskyblue;
+}
+
+.post-textarea {
+    height: 500px !important;
 }

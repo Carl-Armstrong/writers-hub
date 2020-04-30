@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<div th:replace="fragments :: header-bar"></div>
+
+<form method="post" action="/worldcraft/worldhub">
+    <input type="text" name="title">Title
+    <br>
+    <input type="textarea" name="description">
+    <br>
+    <input type="submit" value="Create New World">
+</form>
+
+<hr>
+
+<ul>
+    <th:block th:each="world : ${worlds}">
+        <li class="title_in_list" th:text="${world.title}"></li>
+        <li th:text="${world.description}"></li>
+        <br><br>
+    </th:block>
+</ul>
+</body>
+</html>

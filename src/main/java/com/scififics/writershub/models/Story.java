@@ -3,10 +3,9 @@ package com.scififics.writershub.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 
 @Entity
-public class Chapter {
+public class Story {
 
     @Id
     @GeneratedValue
@@ -14,15 +13,14 @@ public class Chapter {
 
     private String title;
 
-    @Lob
-    private String content;
+    private String description;
 
-    public Chapter(String title, String content) {
+    public Story(String title, String description) {
         this.title = title;
-        this.content = content;
+        this.description = description;
     }
 
-    public Chapter() {}
+    public Story() {}
 
     public String getTitle() {
         return title;
@@ -32,12 +30,12 @@ public class Chapter {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {

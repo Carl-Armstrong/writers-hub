@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+    <div th:replace="fragments :: header-bar"></div>
+
+    <form method="post" action="/storycraft/storyhub">
+        <input type="text" name="title">Title
+        <br>
+        <input type="textarea" name="description">
+        <br>
+        <input type="submit" value="Create New Story">
+    </form>
+
+    <hr>
+
+    <ul>
+        <th:block th:each="story : ${stories}">
+            <li class="title_in_list" th:text="${story.title}"></li>
+            <li th:text="${story.description}"></li>
+            <br><br>
+        </th:block>
+    </ul>
+</body>
+</html>
