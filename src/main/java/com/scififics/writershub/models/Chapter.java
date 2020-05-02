@@ -1,9 +1,6 @@
 package com.scififics.writershub.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Entity
 public class Chapter {
@@ -12,17 +9,29 @@ public class Chapter {
     @GeneratedValue
     private int id;
 
+    @ManyToOne
+    private Story story;
+
     private String title;
 
     @Lob
     private String content;
 
-    public Chapter(String title, String content) {
+    public Chapter(String title, String content, Story aStory) {
         this.title = title;
         this.content = content;
+        this.story = aStory;
     }
 
     public Chapter() {}
+
+    public Story getStory() {
+        return story;
+    }
+
+    public void setStory(Story story) {
+        this.story = story;
+    }
 
     public String getTitle() {
         return title;

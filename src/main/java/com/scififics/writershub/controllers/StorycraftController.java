@@ -1,5 +1,6 @@
 package com.scififics.writershub.controllers;
 
+import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.data.StoryRepository;
 import com.scififics.writershub.models.Story;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class StorycraftController {
     @Autowired
     private StoryRepository storyRepository;
 
+    @Autowired
+    private ChapterRepository chapterRepository;
+
     @GetMapping("storyhub")
     public String renderStoryhubForm(Model model) {
         model.addAttribute("stories", storyRepository.findAll());
@@ -27,6 +31,11 @@ public class StorycraftController {
     public String processStoryhubForm(@ModelAttribute Story newStory, Model model) {
         storyRepository.save(newStory);
         return "redirect:../storycraft/storyhub";
+    }
+
+    @GetMapping("storyview")
+    public String viewStoryview(Model model) {
+        return "storycraft/storyview";
     }
 
 }
