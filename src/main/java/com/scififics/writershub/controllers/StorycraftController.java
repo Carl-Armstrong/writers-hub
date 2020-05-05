@@ -6,10 +6,9 @@ import com.scififics.writershub.models.Story;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("storycraft")
@@ -33,9 +32,17 @@ public class StorycraftController {
         return "redirect:../storycraft/storyhub";
     }
 
-    @GetMapping("storyview")
-    public String viewStoryview(Model model) {
-        return "storycraft/storyview";
+    @GetMapping("storyview/{storyId}")
+    public String viewStoryview(Model model, @PathVariable int storyId) {
+        Optional optStory = storyRepository.findById(storyId);
+        if (optStory.isPresent()) {
+            Story story = (Story) optStory.get();
+            model.addAttribute("story", story);
+            model.addAttribute("chapters", chapterRepository.findAll());
+            return "storycraft/storyview";
+        } else {
+            return "redirect:../storycraft/storyhub";
+        }
     }
 
 }

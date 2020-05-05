@@ -4,6 +4,8 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
+<p th:text="${story.title}"></p>
+
 <table>
     <tr th:each="chapter : ${chapters}">
         <td>
