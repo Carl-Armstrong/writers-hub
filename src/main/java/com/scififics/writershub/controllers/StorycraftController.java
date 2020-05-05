@@ -2,6 +2,8 @@ package com.scififics.writershub.controllers;
 
 import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.data.StoryRepository;
+import com.scififics.writershub.models.Chapter;
+import com.scififics.writershub.models.ChapterData;
 import com.scififics.writershub.models.Story;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,17 +34,17 @@ public class StorycraftController {
         return "redirect:../storycraft/storyhub";
     }
 
-    @GetMapping("storyview/{storyId}")
-    public String viewStoryview(Model model, @PathVariable int storyId) {
-        Optional optStory = storyRepository.findById(storyId);
-        if (optStory.isPresent()) {
-            Story story = (Story) optStory.get();
-            model.addAttribute("story", story);
-            model.addAttribute("chapters", chapterRepository.findAll());
-            return "storycraft/storyview";
+    @RequestMapping(value= "storyview")
+    public String viewStoryview(Model model, @RequestParam String column, @RequestParam String value) {
+        Iterable<Chapter> chapters;
+        if (column.toLowerCase().equals("all")){
+            chapters = chapterRepository.findAll();
         } else {
-            return "redirect:../storycraft/storyhub";
+            chapters = ChapterData.findByColumnAndValue(column, value, chapterRepository.findAll());
         }
+        model.addAttribute("chapters", chapters);
+
+        return "storycraft/storyview";
     }
 
 }

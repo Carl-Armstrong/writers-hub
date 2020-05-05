@@ -16,7 +16,7 @@
 
     <ul>
         <th:block th:each="story : ${stories}">
-            <a class="title_in_list" th:href="@{'/storycraft/storyview/' + ${story.id}}" th:text="${story.title}"></a>
+            <a class="title_in_list" th:href="@{/storycraft/storyview(column=story,value=${story.title})}" th:text="${story.title}"></a>
             <li th:text="${story.description}"></li>
             <br><br>
         </th:block>
