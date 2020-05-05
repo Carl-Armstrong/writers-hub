@@ -3,22 +3,16 @@ package com.scififics.writershub.models;
 import javax.persistence.*;
 
 @Entity
-public class Chapter {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class Chapter extends AbstractEntity{
 
     @ManyToOne
     private Story story;
-
-    private String title;
 
     @Lob
     private String content;
 
     public Chapter(String title, String content, Story aStory) {
-        this.title = title;
+        super();
         this.content = content;
         this.story = aStory;
     }
@@ -33,14 +27,6 @@ public class Chapter {
         this.story = story;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getContent() {
         return content;
     }
@@ -49,7 +35,4 @@ public class Chapter {
         this.content = content;
     }
 
-    public int getId() {
-        return id;
-    }
 }
