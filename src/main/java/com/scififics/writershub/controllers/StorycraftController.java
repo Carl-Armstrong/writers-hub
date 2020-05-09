@@ -2,9 +2,11 @@ package com.scififics.writershub.controllers;
 
 import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.data.StoryRepository;
+import com.scififics.writershub.data.WorldRepository;
 import com.scififics.writershub.models.Chapter;
 import com.scififics.writershub.models.ChapterData;
 import com.scififics.writershub.models.Story;
+import com.scififics.writershub.models.World;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,14 +24,27 @@ public class StorycraftController {
     @Autowired
     private ChapterRepository chapterRepository;
 
+    @Autowired
+    private WorldRepository worldRepository;
+
     @GetMapping("storyhub")
     public String renderStoryhubForm(Model model) {
         model.addAttribute("stories", storyRepository.findAll());
+        model.addAttribute("worlds", worldRepository.findAll());
         return "storycraft/storyhub";
     }
 
     @PostMapping("storyhub")
-    public String processStoryhubForm(@ModelAttribute Story newStory, Model model) {
+    public String processStoryhubForm(@ModelAttribute Story newStory, Model model,
+                                      @RequestParam int worldId) {
+        Optional<World> worldResult = worldRepository.findById(worldId);
+        if (worldResult.isEmpty()) {
+            // Do nothing for now. I'll fix this later
+        } else {
+            World world = worldResult.get();
+            newStory.setWorld(world);
+        }
+
         storyRepository.save(newStory);
         return "redirect:../storycraft/storyhub";
     }

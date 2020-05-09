@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<div th:replace="fragments :: header-bar"></div>
+
+
+<table>
+    <tr th:each="story : ${stories}">
+        <td>
+            <p th:text="${story.title}"></p>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

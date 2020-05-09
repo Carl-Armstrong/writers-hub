@@ -11,10 +11,20 @@ public class Story extends AbstractEntity{
     @JoinColumn
     private List<Chapter> chapterList = new ArrayList<>();
 
+    @ManyToOne
+    private World world;
+
     public Story(String title, String description) {
         super();
     }
 
     public Story() {}
 
+    public World getWorld() {
+        return world;
+    }
+
+    public void setWorld(World world) {
+        this.world = world;
+    }
 }

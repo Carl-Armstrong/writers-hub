@@ -7,6 +7,14 @@
     <form method="post" action="/storycraft/storyhub">
         <input type="text" name="title">Title
         <br>
+        <label th:for="world">World</label>
+        <br>
+        <select name="worldId">
+            <option th:each="world : ${worlds}"
+                    th:text="${world.title}"
+                    th:value="${world.id}"></option>
+        </select>
+        <br>
         <input type="textarea" name="description">
         <br>
         <input type="submit" value="Create New Story">
@@ -16,7 +24,7 @@
 
     <ul>
         <th:block th:each="story : ${stories}">
-            <a class="title_in_list" th:href="@{/storycraft/storyview(column=story,value=${story.title})}" th:text="${story.title}"></a>
+            <a class="title_in_list" th:href="@{/storycraft/storyview(column=story, value=${story.title})}" th:text="${story.title}"></a>
             <li th:text="${story.description}"></li>
             <br><br>
         </th:block>
