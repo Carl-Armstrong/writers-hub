@@ -14,6 +14,7 @@ public class WorldcraftController {
     @Autowired
     private WorldRepository worldRepository;
 
+    @Autowired
     private StoryRepository storyRepository;
 
     @GetMapping("worldhub")
