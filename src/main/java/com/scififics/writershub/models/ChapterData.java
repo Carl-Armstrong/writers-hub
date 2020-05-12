@@ -38,10 +38,12 @@ public class ChapterData {
 
     public static String getFieldValue(Chapter chapter, String fieldName) {
         String theValue;
-        if (fieldName.equals("title")){
+        if (fieldName.equals("chapter")){
             theValue = chapter.getTitle();
-        } else {
+        } else if (fieldName.equals("story")){
             theValue = chapter.getStory().toString();
+        } else {
+            theValue = chapter.getStory().getWorld().toString();
         }
 
         return theValue;
