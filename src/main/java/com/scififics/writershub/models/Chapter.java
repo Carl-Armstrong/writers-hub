@@ -1,6 +1,7 @@
 package com.scififics.writershub.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 public class Chapter extends AbstractEntity{
@@ -9,6 +10,7 @@ public class Chapter extends AbstractEntity{
     private Story story;
 
     @Lob
+    @NotBlank (message = " - Post cannot be left blank")
     private String content;
 
     public Chapter(String title, String content, Story aStory) {

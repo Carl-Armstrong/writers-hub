@@ -5,10 +5,18 @@
 <div th:replace="fragments :: header-bar"></div>
 
 <form method="post" action="/worldcraft/worldhub">
-    <input type="text" name="title">Title
+    <label>Title</label>
+    <span class="error" th:errors="${world.title}"></span>
     <br>
-    <input type="textarea" name="description">
+    <input th:field="${world.title}" class="text-input">
     <br>
+
+    <label>Description</label>
+    <span class="error" th:errors="${world.description}"></span>
+    <br>
+    <textarea th:field="${world.description}"></textarea>
+    <br>
+
     <input type="submit" value="Create New World">
 </form>
 

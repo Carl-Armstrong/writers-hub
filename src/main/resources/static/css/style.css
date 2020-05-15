@@ -36,7 +36,7 @@
     background: #1565c0;
 }
 
-input[type=text] {
+.text-input {
     width: 75%;
     padding: 12px 20px;
     margin: 8px 0;
@@ -47,7 +47,7 @@ input[type=text] {
     background-color: #f8f8f8;
 }
 
-input[type=textarea] {
+textarea {
     width: 75%;
     height: 100px;
     padding 12px 20px;
@@ -82,16 +82,31 @@ hr {
 }
 
 .post-textarea {
+    width: 75%;
+    padding 12px 20px;
+    box-sizing: border-box;
+    border: 3px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    text-align: initial;
     height: 500px !important;
 }
 
 select {
-        width: 75%;
-        padding: 12px 20px;
-        margin: 8px 0;
-        display: inline-block;
-        border: 3px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
-        background-color: #f8f8f8;
+    width: 75%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 3px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+}
+
+.error {
+    color: red;
 }

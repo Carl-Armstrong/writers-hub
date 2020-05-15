@@ -3,6 +3,8 @@ package com.scififics.writershub.models;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @MappedSuperclass
@@ -12,8 +14,10 @@ public abstract class AbstractEntity {
     @GeneratedValue
     private int id;
 
+    @NotBlank (message = " - Title cannot be blank")
     private String title;
 
+    @Size (max = 100, message = " - Description too long")
     private String description;
 
     public String getTitle() {

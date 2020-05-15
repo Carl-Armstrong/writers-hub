@@ -10,8 +10,10 @@ import com.scififics.writershub.models.World;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
@@ -31,12 +33,20 @@ public class StorycraftController {
     public String renderStoryhubForm(Model model) {
         model.addAttribute("stories", storyRepository.findAll());
         model.addAttribute("worlds", worldRepository.findAll());
+        model.addAttribute(new Story());
         return "storycraft/storyhub";
     }
 
     @PostMapping("storyhub")
-    public String processStoryhubForm(@ModelAttribute Story newStory, Model model,
+    public String processStoryhubForm(@ModelAttribute @Valid Story newStory, Errors errors, Model model,
                                       @RequestParam int worldId) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("stories", storyRepository.findAll());
+            model.addAttribute("worlds", worldRepository.findAll());
+            return "storycraft/storyhub";
+        }
+
         Optional<World> worldResult = worldRepository.findById(worldId);
         if (worldResult.isEmpty()) {
             // Do nothing for now. I'll fix this later
