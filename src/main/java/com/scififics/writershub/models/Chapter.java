@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-public class Chapter extends AbstractEntity{
+public class Chapter extends AbstractContentEntity{
 
     @ManyToOne
     private Story story;

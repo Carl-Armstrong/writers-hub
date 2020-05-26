@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class World extends AbstractEntity{
+public class World extends AbstractContentEntity{
 
     @OneToMany
     @JoinColumn

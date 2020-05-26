@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Story extends AbstractEntity{
+public class Story extends AbstractContentEntity{
 
     @OneToMany
     @JoinColumn

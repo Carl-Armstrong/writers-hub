@@ -3,17 +3,10 @@ package com.scififics.writershub.models;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import java.util.Objects;
 
 @Entity
-public class User {
-
-    @Id
-    @GeneratedValue
-    private int id;
+public class User extends AbstractEntity {
 
     @NotNull(message = " - Username is required")
     private String username;
@@ -38,26 +31,9 @@ public class User {
         return encoder.matches(password, pwHash);
     }
 
-    public int getId() {
-        return id;
-    }
-
     @Override
     public String toString() {
         return username;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id == user.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
 }
