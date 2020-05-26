@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title></title>
+</head>
+<body>
+
+<form method="post">
+
+    <input type="hidden" th:field="${chapterTag.chapter}">
+    <select th:field="${chapterTag.tag}">
+        <option th:each="tag : ${tags}"
+                th:value="${tag.id}"
+                th:text="${tag.name}"
+    </select>
+    <input type="submit" value="Add Tag">
+</form>
+
+</body>
+</html>
