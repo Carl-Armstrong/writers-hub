@@ -37,6 +37,17 @@
     </textarea>
     <br>
 
+    <label th:for="tags">Tags:</label>
+    <br>
+    <th:block th:each="tag : ${tags}">
+        <input type="checkbox" name="tags" th:value="${tag.id}">
+        <label th:text="${tag.name}"></label>
+    </th:block>
+    <br>
+    <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
+
+    <br><br>
+
     <input type="submit" value="Post">
 </form>
 
