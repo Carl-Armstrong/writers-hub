@@ -110,3 +110,48 @@ select {
 .error {
     color: red;
 }
+
+.main-content {
+    background-color: AliceBlue;
+    width: 75%;
+    height: 100%;
+}
+
+.display-individual-content {
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    background-color: GhostWhite;
+    border-style: solid;
+    border-color: deepskyblue;
+    border-width: 2px;
+    width: 100%;
+}
+
+.wrapper {
+    padding: 25px;
+    border-style: solid;
+    border-color: deepskyblue;
+    border-width: 5px;
+}
+
+h1 {
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.spacer {
+    border: 1px solid #1565c0;
+}
+
+.left-cell {
+    width: 10%;
+}
+
+.right-cell {
+
+}
