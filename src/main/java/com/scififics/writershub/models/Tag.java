@@ -17,6 +17,12 @@ public class Tag extends AbstractEntity {
     @ManyToMany(mappedBy = "tags")
     private final List<Chapter> chapters = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "tags")
+    private final List<Story> stories = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "tags")
+    private final List<World> worlds = new ArrayList<>();
+
     public Tag() {}
 
     public Tag(String name) {
@@ -34,6 +40,10 @@ public class Tag extends AbstractEntity {
     public List<Chapter> getChapters() {
         return chapters;
     }
+
+    public List<Story> getStories() { return stories; }
+
+    public List<World> getWorlds() { return worlds; }
 
     @Override
     public String toString() {

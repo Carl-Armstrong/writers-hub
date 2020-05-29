@@ -152,6 +152,6 @@ h1 {
     width: 10%;
 }
 
-.right-cell {
-
+.description {
+    font-style: italic;
 }

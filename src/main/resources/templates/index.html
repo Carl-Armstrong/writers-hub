@@ -17,20 +17,22 @@
                         <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
                     </tr>
                     <tr>
+                        <td th:text="${chapter.description}" colspan="2" class="description"></td>
+                    </tr>
+                    <tr>
                         <td class="left-cell">World:</td>
                         <td th:text="${chapter.story.world.title}"></td>
                     </tr>
                     <tr>
                         <td class="left-cell">Story:</td>
-                        <td th:text="${chapter.story.title}" class="right-cell"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${chapter.description}" colspan="2"></td>
+                        <td th:text="${chapter.story.title}"></td>
                     </tr>
                     <tr>
                         <td class="left-cell">Tags:</td>
-                        <td class="right-cell">
-                            <span  th:each="tag : ${tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <td>
+                            <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                            <span th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                            <span th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
                         </td>
                     </tr>
                 </table>

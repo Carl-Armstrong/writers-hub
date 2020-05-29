@@ -14,6 +14,9 @@ public class Story extends AbstractContentEntity{
     @ManyToOne
     private World world;
 
+    @ManyToMany
+    private final List<Tag> tags = new ArrayList<>();
+
     public Story(String title, String description) {
         super();
     }
@@ -27,4 +30,10 @@ public class Story extends AbstractContentEntity{
     public void setWorld(World world) {
         this.world = world;
     }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void addTag(Tag tag) {this.tags.add(tag);}
 }

@@ -4,6 +4,8 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
+<div class="wrapper">
+
 <form method="post" action="/worldcraft/worldhub">
     <label>Title</label>
     <span class="error" th:errors="${world.title}"></span>
@@ -17,17 +19,48 @@
     <textarea th:field="${world.description}"></textarea>
     <br>
 
+    <label th:for="tags">Tags:</label>
+    <br>
+    <th:block th:each="tag : ${tags}">
+        <input type="checkbox" name="tags" th:value="${tag.id}">
+        <label th:text="${tag.name}"></label>
+    </th:block>
+    <br>
+    <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
+
+    <br><br>
+
     <input type="submit" value="Create New World">
 </form>
+</div>
 
-<hr>
+<div class="wrapper">
 
-<ul>
-    <th:block th:each="world : ${worlds}">
-        <a class="title_in_list" th:href="@{/worldcraft/worldview(column=world, value=${world.title})}" th:text="${world.title}"></a>
-        <li th:text="${world.description}"></li>
-        <br><br>
-    </th:block>
-</ul>
+    <h1>All Worlds</h1>
+
+    <div class="main-content">
+
+        <th:block th:each="world : ${worlds}">
+            <a th:href="@{/worldcraft/worldview(column=world, value=${world.title})}">
+                <table class="display-individual-content">
+                    <tr>
+                        <td class="title_in_list" th:text="${world.title}" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${world.description}" colspan="2" class="description"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-cell">Tags:</td>
+                        <td>
+                            <span th:each="tag : ${world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </th:block>
+
+    </div>
+
+</div>
 </body>
 </html>
