@@ -65,4 +65,18 @@ public class PostcraftController {
         return "redirect:../";
     }
 
+    @GetMapping("postview/{chapterId}")
+    public String viewPostview(Model model, @PathVariable int chapterId) {
+
+        Optional optChapter = chapterRepository.findById(chapterId);
+
+        if (optChapter.isPresent()) {
+            Chapter chapter = (Chapter) optChapter.get();
+            model.addAttribute("chapter", chapter);
+            return "postcraft/postview";
+        } else {
+            return "redirect:../";
+        }
+
+    }
 }
