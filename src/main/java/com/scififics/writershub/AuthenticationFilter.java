@@ -24,6 +24,11 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css", "/home");
 
     private static boolean isWhitelisted(String path) {
+        // for development - this needs to be deleted later - whitelists all pages
+        if (path.startsWith("/")) {
+            return true;
+        }
+
         if (path.equals("/")) {
             return true;
         }

@@ -77,6 +77,29 @@ public class PostcraftController {
         } else {
             return "redirect:../";
         }
+    }
 
+    @GetMapping("posthub")
+    public String viewPosthub(Model model) {
+        model.addAttribute("chapters", chapterRepository.findAll());
+        return "postcraft/posthub";
+    }
+
+    @PostMapping("posthub")
+    public String processPosthubForm(Model model, @RequestParam(required = false) int[] chapterId) {
+
+        /*
+        This is a special kind of cheating.
+        I made chapterId an array so I could check if it was null because it is primitive and
+        I need a way to check if it exists. It works so I'm leaving it alone.
+        */
+        if (chapterId != null) {
+            for (int id : chapterId) {
+                chapterRepository.deleteById(id);
+            }
+        }
+
+        model.addAttribute("chapters", chapterRepository.findAll());
+        return "postcraft/posthub";
     }
 }

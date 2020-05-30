@@ -6,46 +6,46 @@
 
     <div class="wrapper">
 
-    <form method="post" action="/storycraft/storyhub">
-        <label>Title</label>
-        <span class="error" th:errors="${story.title}"></span>
-        <br>
-        <input th:field="${story.title}" class="text-input">
-        <br>
+        <form method="post" action="/storycraft/storyhub">
+            <label>Title</label>
+            <span class="error" th:errors="${story.title}"></span>
+            <br>
+            <input th:field="${story.title}" class="text-input">
+            <br>
 
-        <label th:for="world">World</label>
-        <br>
-        <select name="worldId">
-            <option th:each="world : ${worlds}"
-                    th:text="${world.title}"
-                    th:value="${world.id}"></option>
-        </select>
-        <br>
+            <label th:for="world">World</label>
+            <br>
+            <select name="worldId">
+                <option th:each="world : ${worlds}"
+                        th:text="${world.title}"
+                        th:value="${world.id}"></option>
+            </select>
+            <br>
 
-        <label>Description</label>
-        <span class="error" th:errors="${story.description}"></span>
-        <br>
-        <textarea th:field="${story.description}"></textarea>
-        <br>
+            <label>Description</label>
+            <span class="error" th:errors="${story.description}"></span>
+            <br>
+            <textarea th:field="${story.description}"></textarea>
+            <br>
 
-        <label th:for="tags">Tags:</label>
-        <br>
-        <th:block th:each="tag : ${tags}">
-            <input type="checkbox" name="tags" th:value="${tag.id}">
-            <label th:text="${tag.name}"></label>
-        </th:block>
-        <br>
-        <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
+            <label th:for="tags">Tags:</label>
+            <br>
+            <th:block th:each="tag : ${tags}">
+                <input type="checkbox" name="tags" th:value="${tag.id}">
+                <label th:text="${tag.name}"></label>
+            </th:block>
+            <br>
+            <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
 
-        <br><br>
-        <input type="submit" value="Create New Story">
-    </form>
+            <br><br>
+            <input type="submit" value="Create New Story">
+        </form>
 
     </div>
 
     <div class="wrapper">
 
-        <h1>All Stories</h1>
+        <p class="page-title">All Stories</p>
 
         <div class="main-content">
 
