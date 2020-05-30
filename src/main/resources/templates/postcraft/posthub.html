@@ -42,7 +42,8 @@
                                 </span>
                                 <span>
                                     <form method="post" action="/postcraft/posthub">
-                                        <input type="radio" name="chapterId" th:value="${chapter.id}">
+                                        <input type="hidden" name="buttonFunction" value="delete">
+                                        <input type="hidden" name="chapterId" th:value="${chapter.id}">
                                         <input type="submit" value="Delete">
                                     </form>
                                 </span>

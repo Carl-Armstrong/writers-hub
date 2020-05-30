@@ -39,7 +39,7 @@ public class PostcraftController {
 
     @PostMapping("post")
     public String processCreateChapterForm(@ModelAttribute @Valid Chapter newChapter, Errors errors, Model model,
-                                           @RequestParam int storyId, @RequestParam List<Integer> tags) {
+                                           @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags) {
 
         if (errors.hasErrors()) {
             model.addAttribute("stories", storyRepository.findAll());
@@ -47,7 +47,13 @@ public class PostcraftController {
             return "postcraft/post";
         }
 
-        List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+        if (tags != null) {
+            List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+
+            for (Tag tag : tagObjs) {
+                newChapter.addTag(tag);
+            }
+        }
 
         Optional<Story> storyResult = storyRepository.findById(storyId);
         if (storyResult.isEmpty()) {
@@ -55,10 +61,6 @@ public class PostcraftController {
         } else {
             Story story = storyResult.get();
             newChapter.setStory(story);
-        }
-
-        for (Tag tag : tagObjs) {
-            newChapter.addTag(tag);
         }
 
         chapterRepository.save(newChapter);
@@ -86,20 +88,64 @@ public class PostcraftController {
     }
 
     @PostMapping("posthub")
-    public String processPosthubForm(Model model, @RequestParam(required = false) int[] chapterId) {
+    public String processPosthubForm(Model model, @RequestParam String buttonFunction, @RequestParam int chapterId) {
 
-        /*
-        This is a special kind of cheating.
-        I made chapterId an array so I could check if it was null because it is primitive and
-        I need a way to check if it exists. It works so I'm leaving it alone.
-        */
-        if (chapterId != null) {
-            for (int id : chapterId) {
-                chapterRepository.deleteById(id);
-            }
+        if (buttonFunction.equals("delete")) {
+            chapterRepository.deleteById(chapterId);
+        } else if (buttonFunction.equals("edit")) {
+
         }
 
         model.addAttribute("chapters", chapterRepository.findAll());
         return "postcraft/posthub";
+    }
+
+    @GetMapping("edit/{chapterId}")
+    public String renderEditChapterForm(Model model, @PathVariable int chapterId) {
+
+
+        Optional optChapter = chapterRepository.findById(chapterId);
+
+        model.addAttribute("stories", storyRepository.findAll());
+        model.addAttribute("tags", tagRepository.findAll());
+
+        if (optChapter.isPresent()) {
+            Chapter chapter = (Chapter) optChapter.get();
+            model.addAttribute("chapter", chapter);
+            return "postcraft/edit";
+        } else {
+            return "redirect:../";
+        }
+
+    }
+
+    @PostMapping("edit")
+    public String processEditChapterForm(@ModelAttribute @Valid Chapter editedChapter, Errors errors, Model model,
+                                         @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags) {
+
+        if (errors.hasErrors()) {
+            model.addAttribute("stories", storyRepository.findAll());
+            model.addAttribute("tags", tagRepository.findAll());
+            return "postcraft/posthub";
+        }
+
+        if (tags != null) {
+            List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+
+            for (Tag tag : tagObjs) {
+                editedChapter.addTag(tag);
+            }
+        }
+
+        Optional<Story> storyResult = storyRepository.findById(storyId);
+        if (storyResult.isEmpty()) {
+            // later add a default story that catches uncategorized chapters
+        } else {
+            Story story = storyResult.get();
+            editedChapter.setStory(story);
+        }
+
+        chapterRepository.save(editedChapter);
+        return "redirect:../";
     }
 }
