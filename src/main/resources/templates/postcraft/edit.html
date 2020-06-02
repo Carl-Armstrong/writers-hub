@@ -7,7 +7,8 @@
 <div th:replace="fragments :: header-bar"></div>
 <h1>Edit Post</h1>
 
-<form method="post" action="/postcraft/edit">
+<form method="post" th:action="@{/postcraft/edit}">
+    <input type="hidden" th:value="${chapter.id}" name="chapterId"/>
     <label>Title</label>
     <span class="error" th:errors="${chapter.title}"></span>
     <br>

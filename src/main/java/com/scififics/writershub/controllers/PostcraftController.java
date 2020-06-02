@@ -121,31 +121,48 @@ public class PostcraftController {
 
     @PostMapping("edit")
     public String processEditChapterForm(@ModelAttribute @Valid Chapter editedChapter, Errors errors, Model model,
-                                         @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags) {
+                                         @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags,
+                                         @RequestParam int chapterId) {
 
         if (errors.hasErrors()) {
-            model.addAttribute("stories", storyRepository.findAll());
-            model.addAttribute("tags", tagRepository.findAll());
+            model.addAttribute("chapters", chapterRepository.findAll());
             return "postcraft/posthub";
         }
 
-        if (tags != null) {
-            List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+        Optional optChapter = chapterRepository.findById(chapterId);
 
-            for (Tag tag : tagObjs) {
-                editedChapter.addTag(tag);
+        if (optChapter.isPresent()) {
+            Chapter chapter = (Chapter) optChapter.get();
+
+            chapter.setTitle(editedChapter.getTitle());
+            chapter.setDescription(editedChapter.getDescription());
+            chapter.setContent(editedChapter.getContent());
+
+            if (tags != null) {
+                List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+
+                for (Tag tag : tagObjs) {
+                    chapter.addTag(tag);
+                }
             }
-        }
 
-        Optional<Story> storyResult = storyRepository.findById(storyId);
-        if (storyResult.isEmpty()) {
-            // later add a default story that catches uncategorized chapters
+            Optional<Story> storyResult = storyRepository.findById(storyId);
+            if (storyResult.isEmpty()) {
+                // later add a default story that catches uncategorized chapters
+            } else {
+                Story story = storyResult.get();
+                chapter.setStory(story);
+            }
+
+            chapterRepository.save(chapter);
+            return "redirect:../postcraft/edit/" + chapterId;
+
         } else {
-            Story story = storyResult.get();
-            editedChapter.setStory(story);
+            return "redirect:../";
         }
 
-        chapterRepository.save(editedChapter);
-        return "redirect:../";
+
+
+
     }
 }

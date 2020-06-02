@@ -8,6 +8,8 @@
 
         <p class="page-title">All Chapters</p>
 
+        <a href="/postcraft/post">Create New Post</a>
+
         <div class="main-content">
 
             <th:block th:each="chapter : ${chapters}">
@@ -37,16 +39,27 @@
                         </tr>
                         <tr>
                             <td colspan="2">
-                                <span>
-                                    <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">View Chapter</a>
-                                </span>
-                                <span>
-                                    <form method="post" action="/postcraft/posthub">
-                                        <input type="hidden" name="buttonFunction" value="delete">
-                                        <input type="hidden" name="chapterId" th:value="${chapter.id}">
-                                        <input type="submit" value="Delete">
-                                    </form>
-                                </span>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <form method="get" th:action="@{'/postcraft/postview/' + ${chapter.id}}">
+                                                <input type="submit" value="View Post" class="hub-button">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="get" th:action="@{'/postcraft/edit/' + ${chapter.id}}">
+                                                <input type="submit" value="Edit" class="hub-button">
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <form method="post" action="/postcraft/posthub">
+                                                <input type="hidden" name="buttonFunction" value="delete">
+                                                <input type="hidden" name="chapterId" th:value="${chapter.id}">
+                                                <input type="submit" value="Delete" class="hub-button">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>
