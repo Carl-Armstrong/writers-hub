@@ -5,16 +5,16 @@
 <body>
 
 <div th:replace="fragments :: header-bar"></div>
-<h1>Create Tag</h1>
+<p class="page-title">Create Tag</p>
 
 <form method="post" action="/tagcraft/add-tag">
 
     <label th:for="name"></label>
     <span class="error" th:errors="${tag.name}"></span>
     <br>
-    <input th:field="${tag.name}" />
+    <input th:field="${tag.name}" type="text" class="text-input" />
 
-    <input type="submit" value="Add Tag">
+    <input type="submit" value="Add Tag" class="hub-button">
 </form>
 
 <hr>
