@@ -8,6 +8,11 @@ public class SearchData {
 
         ArrayList<Chapter> results = new ArrayList<>();
 
+        if (type.equals("tags")) {
+            results = findByTag(term, allChapters);
+            return results;
+        }
+
         for (Chapter chapter : allChapters) {
 
             String aValue = getFieldValue(chapter, type);
@@ -32,5 +37,21 @@ public class SearchData {
         }
 
         return theValue;
+    }
+
+    public static ArrayList<Chapter> findByTag (String term, Iterable<Chapter> allChapters) {
+
+        ArrayList<Chapter> results = new ArrayList<>();
+
+        for (Chapter chapter : allChapters) {
+            if (chapter.getTags() != null) {
+                for (Tag tag : chapter.getTags()) {
+                    if (tag.toString().toLowerCase().contains(term.toLowerCase()) && !results.contains(chapter)) {
+                        results.add(chapter);
+                    }
+                }
+            }
+        }
+        return results;
     }
 }
