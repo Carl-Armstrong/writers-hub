@@ -9,18 +9,28 @@ public class SearchData {
         ArrayList<Chapter> results = new ArrayList<>();
 
         for (Chapter chapter : allChapters) {
-            results.add(chapter);
-        }
 
-        /*
-        for each chapter : all chapters {
-          if (type.toString.equals(term) && !results.contains(chapter)) {
-            results.add(chapter);
-          }
+            String aValue = getFieldValue(chapter, type);
+
+            if (aValue != null && aValue.toLowerCase().contains(term.toLowerCase())) {
+                results.add(chapter);
+            }
+
         }
 
         return results;
-         */
-        return results;
+    }
+
+    public static String getFieldValue(Chapter chapter, String fieldName) {
+        String theValue;
+        if (fieldName.equals("title")){
+            theValue = chapter.getTitle();
+        } else if (fieldName.equals("description")){
+            theValue = chapter.getDescription();
+        } else {
+            theValue = chapter.getContent();
+        }
+
+        return theValue;
     }
 }

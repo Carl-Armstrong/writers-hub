@@ -2,6 +2,7 @@ package com.scififics.writershub.controllers;
 
 import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.models.Chapter;
+import com.scififics.writershub.models.SearchData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,10 +35,10 @@ public class Search2Controller {
     }
 
     @PostMapping("")
-    public String displaySearchResults(Model model, @RequestParam String  searchType, @RequestParam String searchTerm) {
+    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
         Iterable<Chapter> chapters;
 
-        chapters = chapterRepository.findAll();
+        chapters = SearchData.findByTypeAndTerm(searchType, searchTerm, chapterRepository.findAll());
 
         model.addAttribute("types", typeChoices);
         model.addAttribute("chapters" ,chapters);
