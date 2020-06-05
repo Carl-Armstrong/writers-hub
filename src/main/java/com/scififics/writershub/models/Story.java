@@ -7,9 +7,8 @@ import java.util.List;
 @Entity
 public class Story extends AbstractContentEntity{
 
-    @OneToMany
-    @JoinColumn
-    private List<Chapter> chapterList = new ArrayList<>();
+    @OneToMany(mappedBy = "story")
+    private final List<Chapter> chapterList = new ArrayList<>();
 
     @ManyToOne
     private World world;
@@ -36,4 +35,8 @@ public class Story extends AbstractContentEntity{
     }
 
     public void addTag(Tag tag) {this.tags.add(tag);}
+
+    public List<Chapter> getChapterList() {
+        return chapterList;
+    }
 }

@@ -42,7 +42,7 @@ public class StorycraftController {
 
     @PostMapping("storyhub")
     public String processStoryhubForm(@ModelAttribute @Valid Story newStory, Errors errors, Model model,
-                                      @RequestParam int worldId, @RequestParam List<Integer> tags) {
+                                      @RequestParam int worldId, @RequestParam(required = false) List<Integer> tags) {
 
         if (errors.hasErrors()) {
             model.addAttribute("stories", storyRepository.findAll());
@@ -51,7 +51,13 @@ public class StorycraftController {
             return "storycraft/storyhub";
         }
 
-        List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+        if (tags != null) {
+            List<Tag> tagObjs = (List<Tag>) tagRepository.findAllById(tags);
+
+            for (Tag tag : tagObjs) {
+                newStory.addTag(tag);
+            }
+        }
 
         Optional<World> worldResult = worldRepository.findById(worldId);
         if (worldResult.isEmpty()) {
@@ -61,25 +67,22 @@ public class StorycraftController {
             newStory.setWorld(world);
         }
 
-        for (Tag tag : tagObjs) {
-            newStory.addTag(tag);
-        }
-
         storyRepository.save(newStory);
         return "redirect:../storycraft/storyhub";
     }
 
-    @RequestMapping(value= "storyview")
-    public String viewStoryview(Model model, @RequestParam String column, @RequestParam String value) {
-        Iterable<Chapter> chapters;
-        if (column.toLowerCase().equals("all")){
-            chapters = chapterRepository.findAll();
-        } else {
-            chapters = ChapterData.findByColumnAndValue(column, value, chapterRepository.findAll());
-        }
-        model.addAttribute("chapters", chapters);
+    @RequestMapping(value= "storyview/{storyId}")
+    public String viewStoryview(Model model, @PathVariable int storyId) {
 
-        return "storycraft/storyview";
+        Optional optStory = storyRepository.findById(storyId);
+
+        if (optStory.isPresent()) {
+            Story story = (Story) optStory.get();
+            model.addAttribute("story", story);
+            return "storycraft/storyview";
+        } else {
+            return "redirect:../";
+        }
     }
 
 }

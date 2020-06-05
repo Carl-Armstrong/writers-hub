@@ -6,32 +6,32 @@
 
 <div class="wrapper">
 
-<form method="post" action="/worldcraft/worldhub">
-    <label>Title</label>
-    <span class="error" th:errors="${world.title}"></span>
-    <br>
-    <input th:field="${world.title}" class="text-input">
-    <br>
+    <form method="post" action="/worldcraft/worldhub">
+        <label>Title</label>
+        <span class="error" th:errors="${world.title}"></span>
+        <br>
+        <input th:field="${world.title}" class="text-input">
+        <br>
 
-    <label>Description</label>
-    <span class="error" th:errors="${world.description}"></span>
-    <br>
-    <textarea th:field="${world.description}"></textarea>
-    <br>
+        <label>Description</label>
+        <span class="error" th:errors="${world.description}"></span>
+        <br>
+        <textarea th:field="${world.description}"></textarea>
+        <br>
 
-    <label th:for="tags">Tags:</label>
-    <br>
-    <th:block th:each="tag : ${tags}">
-        <input type="checkbox" name="tags" th:value="${tag.id}">
-        <label th:text="${tag.name}"></label>
-    </th:block>
-    <br>
-    <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
+        <label th:for="tags">Tags:</label>
+        <br>
+        <th:block th:each="tag : ${tags}">
+            <input type="checkbox" name="tags" th:value="${tag.id}">
+            <label th:text="${tag.name}"></label>
+        </th:block>
+        <br>
+        <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
 
-    <br><br>
+        <br><br>
 
-    <input type="submit" value="Create New World" class="form-button">
-</form>
+        <input type="submit" value="Create New World" class="form-button">
+    </form>
 </div>
 
 <div class="wrapper">
@@ -41,7 +41,7 @@
     <div class="main-content">
 
         <th:block th:each="world : ${worlds}">
-            <a th:href="@{/worldcraft/worldview(column=world, value=${world.title})}">
+            <a th:href="@{'/worldcraft/worldview/' + ${world.id}}">
                 <table class="display-individual-content">
                     <tr>
                         <td class="title_in_list" th:text="${world.title}" colspan="2"></td>

@@ -2,7 +2,7 @@ package com.scififics.writershub.controllers;
 
 import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.models.Chapter;
-import com.scififics.writershub.models.ChapterData;
+import com.scififics.writershub.models.SearchData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,32 +19,30 @@ public class SearchController {
     @Autowired
     private ChapterRepository chapterRepository;
 
-    static HashMap<String, String> columnChoices = new HashMap<>();
+    static HashMap<String, String> typeChoices = new HashMap<>();
 
     public SearchController () {
-        columnChoices.put("all", "All");
-        columnChoices.put("chapter", "Chapter");
-        columnChoices.put("story", "Story");
-        columnChoices.put("world", "World");
+        typeChoices.put("title", "Title");
+        typeChoices.put("description", "Description");
+        typeChoices.put("content", "Content");
+        typeChoices.put("tags", "Tags");
     }
 
     @RequestMapping("")
     public String search(Model model) {
-        model.addAttribute("columns", columnChoices);
+        model.addAttribute("types", typeChoices);
         return "search";
     }
 
-    @PostMapping("")
-    public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
-        Iterable<Chapter> chapters;
-        if (searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
-            chapters = chapterRepository.findAll();
-        } else {
-            chapters = ChapterData.findByColumnAndValue(searchType, searchTerm, chapterRepository.findAll());
+        @PostMapping("")
+        public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm) {
+            Iterable<Chapter> chapters;
+
+            chapters = SearchData.findByTypeAndTerm(searchType, searchTerm, chapterRepository.findAll());
+
+            model.addAttribute("types", typeChoices);
+            model.addAttribute("chapters" ,chapters);
+
+            return "search";
         }
-        model.addAttribute("columns", columnChoices);
-        model.addAttribute("chapters", chapters);
-
-        return "search";
-    }
 }

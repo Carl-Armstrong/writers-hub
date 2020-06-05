@@ -4,15 +4,39 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
+<div class="wrapper">
 
-<table>
-    <tr th:each="story : ${stories}">
-        <td>
-            <p th:text="${story.title}"></p>
-        </td>
-    </tr>
+    <p th:text="${world.title}" class="page-title"></p>
 
-</table>
+    <div class="main-content">
+
+        <th:block th:each="story : ${world.storyList}">
+            <a href="@{'/storycraft/storyview/' + ${story.id}}">
+                <table class="display-individual-content">
+                    <tr>
+                        <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="${story.description}" colspan="2" class="description"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-cell">World:</td>
+                        <td th:text="${story.world.title}"></td>
+                    </tr>
+                    <tr>
+                        <td class="left-cell">Tags:</td>
+                        <td>
+                            <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                            <span th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        </td>
+                    </tr>
+                </table>
+            </a>
+        </th:block>
+
+    </div>
+
+</div>
 
 </body>
 </html>

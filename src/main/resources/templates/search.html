@@ -9,14 +9,14 @@
     <h2>Search by:</h2>
 
     <p>
-        <span th:each="column : ${columns}">
+        <span th:each="type : ${types}">
             <input
-                type="radio"
-                name="searchType"
-                th:id="${column.key}"
-                th:value="${column.key}"
-                th:checked="${column.key == 'all'}"/>
-            <label th:for="${column.key}" th:text="${column.value}"></label>
+                    type="radio"
+                    name="searchType"
+                    th:id="${type.key}"
+                    th:value="${type.key}"
+                    th:checked="${type.key == 'title'}" />
+            <label th:for="${type.key}" th:text="${type.value}"></label>
         </span>
     </p>
 
