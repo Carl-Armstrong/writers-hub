@@ -11,7 +11,7 @@
     <div class="main-content">
 
         <th:block th:each="story : ${world.storyList}">
-            <a href="@{'/storycraft/storyview/' + ${story.id}}">
+            <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
                 <table class="display-individual-content">
                     <tr>
                         <td class="title_in_list" th:text="${story.title}" colspan="2"></td>

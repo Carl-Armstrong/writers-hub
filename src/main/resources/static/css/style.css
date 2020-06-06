@@ -171,3 +171,17 @@ select {
 .hub-button:hover {
     background-color: #1565c0;
 }
+
+.formatted-text {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 10px;
+    background-color: GhostWhite;
+    border-style: solid;
+    border-color: deepskyblue;
+    border-width: 2px;
+    width: 100%;
+}
