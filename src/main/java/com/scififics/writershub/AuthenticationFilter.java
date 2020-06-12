@@ -21,19 +21,24 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     @Autowired
     AuthenticationController authenticationController;
 
+    // list of whitelisted paths (anything beginning with these paths is whitelisted)
     private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/css", "/home");
 
     private static boolean isWhitelisted(String path) {
-        // for development - this needs to be deleted later - whitelists all pages
+        /*
+            The following if statement should be commented out or deleted.
+            It whitelists all pages. This is for convenience while developing.
+         */
         if (path.startsWith("/")) {
             return true;
         }
 
-
+        // This whitelists the landing page. - .equals rather than .startsWith
         if (path.equals("/")) {
             return true;
         }
 
+        // This whitelists all paths on the list defined above
         for (String pathRoot : whitelist) {
             if (path.startsWith(pathRoot)) {
                 return true;
