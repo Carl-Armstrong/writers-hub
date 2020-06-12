@@ -29,6 +29,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
             return true;
         }
 
+
         if (path.equals("/")) {
             return true;
         }
