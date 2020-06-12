@@ -1,10 +1,10 @@
 # writers-hub
-Writers Hub is a blog-like website designed to give writers a form of "version control".
-The intended user will share their content with editors and early readers for the purpose
-of feedback.
+Writers Hub is a blog-like website designed for writers to give them a more
+professional format to display their work. It is divided by worlds, stories,
+ and chapters
 
 ## Status
-This app is the beginning stages of design and development.
+MVP features have been implemented. Working on formatting and improving UI
 
 ## MVP Features
 * Log in and out
