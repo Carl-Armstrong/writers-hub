@@ -1,5 +1,6 @@
 package com.scififics.writershub.models;
 
+import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -10,7 +11,8 @@ public abstract class AbstractContentEntity extends AbstractEntity{
     @NotBlank(message = " - Title cannot be blank")
     private String title;
 
-    @Size(max = 100, message = " - Description too long")
+    @Column(columnDefinition = "TEXT")
+    @Size(max = 500, message = " - Description too long")
     private String description;
 
     public String getTitle() {
