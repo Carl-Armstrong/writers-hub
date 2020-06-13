@@ -1,7 +1,9 @@
 package com.scififics.writershub;
 
+import com.scififics.writershub.data.ChapterRepository;
 import com.scififics.writershub.data.StoryRepository;
 import com.scififics.writershub.data.WorldRepository;
+import com.scififics.writershub.models.Chapter;
 import com.scififics.writershub.models.Story;
 import com.scififics.writershub.models.World;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class DataPreloader implements CommandLineRunner {
     @Autowired
     private StoryRepository storyRepository;
 
+    @Autowired
+    private ChapterRepository chapterRepository;
+
     @Override
     public void run(String...args) throws Exception {
 
@@ -43,6 +48,17 @@ public class DataPreloader implements CommandLineRunner {
             story.setDescription("Default");
             story.setWorld(world);
             storyRepository.save(story);
+
+            // create a post which explains use of this app to user
+            Chapter chapter = new Chapter();
+            chapter.setTitle("Welcome to Writer's Hub");
+            chapter.setDescription("Click here for tips on how to use this app");
+            chapter.setStory(story);
+            chapter.setContent("Welcome to Writer's Hub.\r\n" +
+                    "There will be instructions here when I get around to creating them.\r\n" +
+                    "\r\n" +
+                    "For now, I'm just making sure this works and leaving it as a placeholder.");
+            chapterRepository.save(chapter);
         }
     }
 }
