@@ -32,7 +32,9 @@
 
 <ul>
     <th:block th:each="chapter : ${chapters}">
-        <li class="title_in_list" th:text="${chapter.title}"></li>
+        <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
+            <li class="title_in_list" th:text="${chapter.title}"></li>
+        </a>
     </th:block>
 </ul>
 
