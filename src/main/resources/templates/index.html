@@ -1,15 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{mainlayout.html}">
+<head>
 </head>
 <body>
-    <div th:replace="fragments :: header-bar"></div>
-
-    <div class="wrapper">
-
-        <p class="page-title">Writer's Hub</p>
-
-        <div class="main-content">
+        <div class="main-content" layout:fragment="content">
 
             <th:block th:each="chapter : ${chapters}">
                 <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
@@ -42,8 +38,6 @@
             </th:block>
 
         </div>
-
-    </div>
 
 </body>
 </html>
