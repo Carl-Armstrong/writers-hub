@@ -92,8 +92,6 @@ public class PostcraftController {
 
         if (buttonFunction.equals("delete")) {
             chapterRepository.deleteById(chapterId);
-        } else if (buttonFunction.equals("edit")) {
-
         }
 
         model.addAttribute("chapters", chapterRepository.findAll());

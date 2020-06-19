@@ -9,6 +9,7 @@
 </head>
 <body>
 
+<!-- Displays the header bar with links to different areas of the site -->
     <ul th:fragment="header-bar" class="header-bar">
         <li>Hello User!</li>
         <li><a href="/register">Register</a> </li>
@@ -21,6 +22,148 @@
         <li><a href="/postcraft/posthub">Chapters</a></li>
         <li><a href="/search">Search</a></li>
     </ul>
+
+<!-- Displays individual world -->
+    <th:block th:fragment="individual-world" th:each="story : ${world.storyList}">
+        <a th:href="@{'/storyview/storyviewer/' + ${story.id}}">
+            <table class="display-individual-content">
+                <tr>
+                    <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:text="${story.description}" colspan="2" class="description"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">World:</td>
+                    <td th:text="${story.world.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Tags:</td>
+                    <td>
+                        <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </th:block>
+
+<!-- Displays list of worlds -->
+    <th:block th:fragment="list-of-worlds" th:each="world : ${worlds}">
+        <a th:href="@{'/worldview/worldviewer/' + ${world.id}}">
+            <table class="display-individual-content">
+                <tr>
+                    <td class="title_in_list" th:text="${world.title}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:text="${world.description}" colspan="2" class="description"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Tags:</td>
+                    <td>
+                        <span th:each="tag : ${world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </th:block>
+
+<!-- Displays list of stories -->
+    <th:block th:fragment="list-of-stories" th:each="story : ${stories}">
+        <a th:href="@{'/storyview/storyviewer/' + ${story.id}}">
+            <table class="display-individual-content">
+                <tr>
+                    <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:text="${story.description}" colspan="2" class="description"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">World:</td>
+                    <td th:text="${story.world.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Tags:</td>
+                    <td>
+                        <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+
+    </th:block>
+
+<!-- Displays individual story -->
+    <th:block th:fragment="individual-story" th:each="chapter : ${story.chapterList}">
+        <a th:href="@{'/chapterview/chapterviewer/' + ${chapter.id}}">
+            <table class="display-individual-content">
+                <tr>
+                    <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:text="${chapter.description}" colspan="2" class="description"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">World:</td>
+                    <td th:text="${chapter.story.world.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Story:</td>
+                    <td th:text="${chapter.story.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Tags:</td>
+                    <td>
+                        <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+    </th:block>
+
+<!-- Displays list of chapters -->
+    <th:block th:fragment="list-of-chapters" th:each="chapter : ${chapters}">
+        <a th:href="@{'/chapterview/chapterviewer/' + ${chapter.id}}">
+            <table class="display-individual-content">
+                <tr>
+                    <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
+                </tr>
+                <tr>
+                    <td th:text="${chapter.description}" colspan="2" class="description"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">World:</td>
+                    <td th:text="${chapter.story.world.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Story:</td>
+                    <td th:text="${chapter.story.title}"></td>
+                </tr>
+                <tr>
+                    <td class="left-cell">Tags:</td>
+                    <td>
+                        <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </td>
+                </tr>
+            </table>
+        </a>
+
+    </th:block>
+
+<!-- Display individual chapter -->
+    <th:block th:fragment="individual-chapter">
+
+        <p class="page-title" th:text="${chapter.title}"></p>
+
+        <div class="main-content">
+            <p class="formatted-text" th:text="${chapter.content}"></p>
+        </div>
+
+    </th:block>
 
 </body>
 </html>
