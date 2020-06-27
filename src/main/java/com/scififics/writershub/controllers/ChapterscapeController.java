@@ -30,14 +30,14 @@ public class ChapterscapeController {
     private TagRepository tagRepository;
 
     @GetMapping("")
-    public String viewChapterhub(Model model) {
+    public String viewIndex(Model model) {
         model.addAttribute("chapters", chapterRepository.findAll());
         model.addAttribute("pageTitle", "All Chapters");
         return "createspace/chapterscape/index";
     }
 
     @PostMapping("")
-    public String processChapterhubForm(Model model, @RequestParam String buttonFunction,
+    public String processIndexForm(Model model, @RequestParam String buttonFunction,
                                         @RequestParam int chapterId) {
 
         if (buttonFunction.equals("delete")) {
