@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{mainlayout.html}">
+      layout:decorate="~{mainlayout.html}">
 <head>
     <title>All Chapters</title>
 </head>
 <body>
 <div class="main-content" layout:fragment="content">
 
-    <a href="/postcraft/post">Create New Post</a>
+    <a href="/createspace/chapterscape/chapterbuilder">Create New Post</a>
 
     <th:block th:each="chapter : ${chapters}">
 
@@ -45,12 +45,12 @@
                                 </form>
                             </td>
                             <td>
-                                <form method="get" th:action="@{'/postcraft/edit/' + ${chapter.id}}">
+                                <form method="get" th:action="@{'/createspace/chapterscape/chapterbreaker/' + ${chapter.id}}">
                                     <input type="submit" value="Edit" class="hub-button">
                                 </form>
                             </td>
                             <td>
-                                <form method="post" action="/postcraft/posthub">
+                                <form method="post" action="/createspace/chapterscape">
                                     <input type="hidden" name="buttonFunction" value="delete">
                                     <input type="hidden" name="chapterId" th:value="${chapter.id}">
                                     <input type="submit" value="Delete" class="hub-button">
@@ -61,7 +61,6 @@
                 </td>
             </tr>
         </table>
-        <input>
 
     </th:block>
 

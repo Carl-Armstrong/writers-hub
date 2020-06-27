@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("postcraft")
-public class PostcraftController {
+@RequestMapping("createspace/chapterscape")
+public class ChapterscapeController {
 
     @Autowired
     private ChapterRepository chapterRepository;
@@ -29,22 +29,45 @@ public class PostcraftController {
     @Autowired
     private TagRepository tagRepository;
 
-    @GetMapping("post")
-    public String renderCreateChapterForm(Model model) {
-        model.addAttribute("stories", storyRepository.findAll());
-        model.addAttribute(new Chapter());
-        model.addAttribute("tags", tagRepository.findAll());
-        return "postcraft/post";
+    @GetMapping("")
+    public String viewChapterhub(Model model) {
+        model.addAttribute("chapters", chapterRepository.findAll());
+        model.addAttribute("pageTitle", "All Chapters");
+        return "createspace/chapterscape/index";
     }
 
-    @PostMapping("post")
-    public String processCreateChapterForm(@ModelAttribute @Valid Chapter newChapter, Errors errors, Model model,
-                                           @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags) {
+    @PostMapping("")
+    public String processChapterhubForm(Model model, @RequestParam String buttonFunction,
+                                        @RequestParam int chapterId) {
+
+        if (buttonFunction.equals("delete")) {
+            chapterRepository.deleteById(chapterId);
+        }
+
+        model.addAttribute("chapters", chapterRepository.findAll());
+        model.addAttribute("pageTitle", "All Chapters");
+        return "createspace/chapterscape/index";
+    }
+
+    @GetMapping("chapterbuilder")
+    public String renderCreateChapterForm(Model model) {
+        model.addAttribute("stories", storyRepository.findAll());
+        model.addAttribute("tags", tagRepository.findAll());
+        model.addAttribute("pageTitle", "Create New Chapter");
+        model.addAttribute(new Chapter());
+        return "createspace/chapterscape/chapterbuilder";
+    }
+
+    @PostMapping("chapterbuilder")
+    public String processCreateChapterForm(@ModelAttribute @Valid Chapter newChapter, Errors errors,
+                                           Model model, @RequestParam int storyId,
+                                           @RequestParam(required = false) List<Integer> tags) {
 
         if (errors.hasErrors()) {
             model.addAttribute("stories", storyRepository.findAll());
             model.addAttribute("tags", tagRepository.findAll());
-            return "postcraft/post";
+            model.addAttribute("pageTitle", "Create New Chapter");
+            return "createspace/chapterscape/chapterbuilder";
         }
 
         if (tags != null) {
@@ -64,41 +87,10 @@ public class PostcraftController {
         }
 
         chapterRepository.save(newChapter);
-        return "redirect:../";
+        return "redirect:../../chapterview/chapterviewer/" + newChapter.getId();
     }
 
-    @GetMapping("postview/{chapterId}")
-    public String viewPostview(Model model, @PathVariable int chapterId) {
-
-        Optional optChapter = chapterRepository.findById(chapterId);
-
-        if (optChapter.isPresent()) {
-            Chapter chapter = (Chapter) optChapter.get();
-            model.addAttribute("chapter", chapter);
-            return "postcraft/postview";
-        } else {
-            return "redirect:../";
-        }
-    }
-
-    @GetMapping("posthub")
-    public String viewPosthub(Model model) {
-        model.addAttribute("chapters", chapterRepository.findAll());
-        return "postcraft/posthub";
-    }
-
-    @PostMapping("posthub")
-    public String processPosthubForm(Model model, @RequestParam String buttonFunction, @RequestParam int chapterId) {
-
-        if (buttonFunction.equals("delete")) {
-            chapterRepository.deleteById(chapterId);
-        }
-
-        model.addAttribute("chapters", chapterRepository.findAll());
-        return "postcraft/posthub";
-    }
-
-    @GetMapping("edit/{chapterId}")
+    @GetMapping("chapterbreaker/{chapterId}")
     public String renderEditChapterForm(Model model, @PathVariable int chapterId) {
 
 
@@ -109,22 +101,22 @@ public class PostcraftController {
 
         if (optChapter.isPresent()) {
             Chapter chapter = (Chapter) optChapter.get();
+            model.addAttribute("pageTitle", "Editing " + chapter.getTitle());
             model.addAttribute("chapter", chapter);
-            return "postcraft/edit";
+            return "createspace/chapterscape/chapterbreaker";
         } else {
-            return "redirect:../";
+            return "redirect:../createspace/chapterscape/index/";
         }
-
     }
 
-    @PostMapping("edit")
+    @PostMapping("chapterbreaker")
     public String processEditChapterForm(@ModelAttribute @Valid Chapter editedChapter, Errors errors, Model model,
                                          @RequestParam int storyId, @RequestParam(required = false) List<Integer> tags,
                                          @RequestParam int chapterId) {
 
         if (errors.hasErrors()) {
             model.addAttribute("chapters", chapterRepository.findAll());
-            return "postcraft/posthub";
+            return "redirect:../createspace/chapterscape/chapterbreaker/" + chapterId;
         }
 
         Optional optChapter = chapterRepository.findById(chapterId);
@@ -153,14 +145,10 @@ public class PostcraftController {
             }
 
             chapterRepository.save(chapter);
-            return "redirect:../postcraft/edit/" + chapterId;
+            return "redirect:../createspace/chapterscape/chapterbreaker" + chapterId;
 
         } else {
-            return "redirect:../";
+            return "redirect:../createspace/chapterscape/index/";
         }
-
-
-
-
     }
 }

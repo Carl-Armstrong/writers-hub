@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Chapter Breaker</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <form method="post" th:action="@{/postcraft/edit}">
+        <input type="hidden" th:value="${chapter.id}" name="chapterId"/>
+        <label>Title</label>
+        <span class="error" th:errors="${chapter.title}"></span>
+        <br>
+        <input th:field="${chapter.title}" class="text-input">
+        <br>
+
+        <label th:for="story">Story</label>
+        <br>
+        <select name="storyId">
+            <option th:each="story : ${stories}"
+                    th:text="${story.title}"
+                    th:value="${story.id}"></option>
+        </select>
+        <br>
+
+        <label>Description</label>
+        <span class="error" th:errors="${chapter.description}"></span>
+        <br>
+        <textarea th:field="${chapter.description}"></textarea>
+        <br>
+
+
+        <label>Post</label>
+        <span class="error" th:errors="${chapter.content}"></span>
+        <br>
+        <textarea class="post-textarea" th:field="${chapter.content}">
+    </textarea>
+        <br>
+
+        <label th:for="tags">Tags:</label>
+        <br>
+        <th:block th:each="tag : ${tags}">
+            <input type="checkbox" name="tags" th:value="${tag.id}">
+            <label th:text="${tag.name}"></label>
+        </th:block>
+        <br>
+        <a th:href="@{'/createspace/tagscape'}">Add Tags</a>
+
+        <br><br>
+
+        <input type="submit" value="Save Changes" class="form-button">
+    </form>
+
+</div>
+
+</body>
+</html>
