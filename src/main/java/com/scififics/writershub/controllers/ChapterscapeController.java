@@ -80,7 +80,10 @@ public class ChapterscapeController {
 
         Optional<Story> storyResult = storyRepository.findById(storyId);
         if (storyResult.isEmpty()) {
-            // later add a default story that catches uncategorized chapters
+            // set story to the first story in the repository aka the default story
+            List<Story> allStories = (List<Story>) storyRepository.findAll();
+            Story newStory = allStories.get(0);
+            newChapter.setStory(newStory);
         } else {
             Story story = storyResult.get();
             newChapter.setStory(story);
@@ -138,14 +141,17 @@ public class ChapterscapeController {
 
             Optional<Story> storyResult = storyRepository.findById(storyId);
             if (storyResult.isEmpty()) {
-                // later add a default story that catches uncategorized chapters
+                // set story to the first story in the repository aka the default story
+                List<Story> allStories = (List<Story>) storyRepository.findAll();
+                Story newStory = allStories.get(0);
+                chapter.setStory(newStory);
             } else {
                 Story story = storyResult.get();
                 chapter.setStory(story);
             }
 
             chapterRepository.save(chapter);
-            return "redirect:../createspace/chapterscape/chapterbreaker" + chapterId;
+            return "redirect:../chapterbreaker/" + chapterId;
 
         } else {
             return "redirect:../createspace/chapterscape/index/";
