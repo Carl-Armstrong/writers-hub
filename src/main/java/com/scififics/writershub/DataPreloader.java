@@ -54,10 +54,41 @@ public class DataPreloader implements CommandLineRunner {
             chapter.setTitle("Welcome to Writer's Hub");
             chapter.setDescription("Click here for tips on how to use this app");
             chapter.setStory(story);
-            chapter.setContent("Welcome to Writer's Hub.\r\n" +
-                    "There will be instructions here when I get around to creating them.\r\n" +
+            chapter.setContent("Welcome to Writer's Hub!\r\n" +
                     "\r\n" +
-                    "For now, I'm just making sure this works and leaving it as a placeholder.");
+                    "Writer's Hub features a blog-like structure that organizes your writing into Worlds, " +
+                    "Stories, and Chapters.\r\n" +
+                    "\r\n" +
+                    "Worlds\r\n" +
+                    "A World holds all Stories that share a continuity. For instance, if you were Disney, you might " +
+                    "have a World named ‘Marvel’ and another named ‘Star Wars’.\r\n" +
+                    "Click on the ‘Worlds’ tab. Enter a title and description. Now click ‘Create New World’. It’s that " +
+                    "easy. All Worlds will be listed below. If you click on a World, you will be directed to that " +
+                    "World’s page, which lists all Stories within it.\r\n" +
+                    "\r\n" +
+                    "Stories\r\n" +
+                    "The next level down is Story. All Stories fit into a World and are filled with Chapters. To " +
+                    "continue our Disney example, ‘Iron Man’ and ‘Guardians of the Galaxy’ would be Stories in the " +
+                    "‘Marvel’ World while ‘Episode IV’ and ‘Episode V’ would be Stories in the ‘Star Wars’ World.\r\n" +
+                    "Click on the ‘Stories’ tab. Enter a title and description and select the World you want your Story " +
+                    "to belong to. Now click ‘Create New Story’. All Stories will be listed below. If you click on a " +
+                    "Story, you will be directed to that Story’s page, which lists all Chapters within it.\r\n" +
+                    "\r\n" +
+                    "Chapters\r\n" +
+                    "Chapters are the lowest level of the Writer’s Hub structure. This is where you will create the " +
+                    "actual content to be read.\r\n" +
+                    "Click on the ‘Chapters’ tab. You will see a list of all Chapters. You may view, edit, or delete any " +
+                    "of the Chapters by pressing the appropriate button. To create a Chapter, click the ‘Create New Post’ " +
+                    "link at the top. Fill in the title and description and select the Story your chapter belongs to. " +
+                    "And of course, paste or type your chapter in the large box. When you are done, click ‘Post’ at the " +
+                    "bottom of the page. You will be redirected to the home page where you will see a list of all " +
+                    "Chapters. Click on any of them to read them.\r\n" +
+                    "\r\n" +
+                    "Tags\r\n" +
+                    "As you were adding Worlds, Stories, and Chapters, you probably noticed the Tags. If there are " +
+                    "already tags listed, you can check any of their boxes to include them. Or you can click ‘Add Tags’ " +
+                    "and create new tags.\r\n"
+            );
             chapterRepository.save(chapter);
         }
     }
