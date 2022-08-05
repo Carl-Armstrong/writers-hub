@@ -4,13 +4,16 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
-<div class="wrapper">
+<div class="wrapper container">
 
-    <p class="page-title" th:text="${chapter.title}"></p>
 
-    <div class="main-content">
-        <p class="formatted-text" th:text="${chapter.content}"></p>
+    <h2 class="text-center" th:text="${chapter.title}"></h2>
+    <div class="row" style="">
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <pre th:text="${chapter.content}" style="white-space: pre-wrap;"></pre>  <!-- TODO Get this to wrap text without breaking words  -->
+        </div>
     </div>
+
 
 </div>
 
