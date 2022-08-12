@@ -5,45 +5,31 @@
 <body>
     <div th:replace="fragments :: header-bar"></div>
 
-    <div class="wrapper">
-
-        <p class="page-title">Writer's Hub</p>
-
-        <div class="main-content">
-
-            <th:block th:each="chapter : ${chapters}">
+    <div class="container">
+        <th:block th:each="chapter : ${chapters}">
+            <div class="span8">
                 <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
-                    <table class="display-individual-content">
-                        <tr>
-                            <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td th:text="${chapter.description}" colspan="2" class="description"></td>
-                        </tr>
-                        <tr>
-                            <td class="left-cell">World:</td>
-                            <td th:text="${chapter.story.world.title}"></td>
-                        </tr>
-                        <tr>
-                            <td class="left-cell">Story:</td>
-                            <td th:text="${chapter.story.title}"></td>
-                        </tr>
-                        <tr>
-                            <td class="left-cell">Tags:</td>
-                            <td>
-                                <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                                <span th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                                <span th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            </td>
-                        </tr>
-                    </table>
+                    <h1 th:text="${chapter.title}">Default post name</h1>
+                    <p th:text="${chapter.description}">Default post description</p>
                 </a>
 
-            </th:block>
+                <div>
+                    <hr>
+                    <div>
+                        <p th:text="'World:   ' + ${chapter.story.world.title}">If you can see this paragraph, something messed up.</p>
+                        <p th:text="'Story:   ' + ${chapter.story.title}">If you can see this paragraph, something messed up.</p>
+                    </div>
 
-        </div>
-
-    </div>
+                    <div class="tags">
+                        <span class="btn-info" th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span class="btn-info" th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                        <span class="btn-info" th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <hr style="height: 50px;">
+            </div>
+        </th:block>
 
 </body>
 </html>
