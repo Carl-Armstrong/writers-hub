@@ -8,6 +8,10 @@
     <div class="container">
         <th:block th:each="chapter : ${chapters}">
             <div class="span8">
+                <div class="col-12">
+                    <img loading="lazy" th:src="@{/images/WHLogo.jpg}" class="img-fluid" alt="post-thumb"
+                         style="width: 400px; height: 150px;"/>  <!-- TODO allow user to set images.-->
+                </div>
                 <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
                     <h1 th:text="${chapter.title}">Default post name</h1>
                     <p th:text="${chapter.description}">Default post description</p>
@@ -30,6 +34,8 @@
                 <hr style="height: 50px;">
             </div>
         </th:block>
+
+
 
 </body>
 </html>
