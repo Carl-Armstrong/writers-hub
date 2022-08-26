@@ -3,39 +3,28 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <div th:replace="fragments :: header-bar"></div>
+<div class="container bg-warning">
+<div class=" text-center mt-5 mb-3 ">
+    <h2 th:text="'List of Stories set in ' + ${world.title} + ':' ">All Worlds:</h2>
+    <h5>Click on any story to see all chapters</h5>
+</div>
 
-<div class="wrapper">
+<th:block th:each="story : ${world.storyList}">
+    <div class="span8">
+        <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
+            <h1 th:text="${story.title}">Default story name</h1>
+            <p th:text="${story.description}">Default story description</p>
+        </a>
 
-    <p th:text="${world.title}" class="page-title"></p>
-
-    <div class="main-content">
-
-        <th:block th:each="story : ${world.storyList}">
-            <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
-                <table class="display-individual-content">
-                    <tr>
-                        <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${story.description}" colspan="2" class="description"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">World:</td>
-                        <td th:text="${story.world.title}"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">Tags:</td>
-                        <td>
-                            <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            <span th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                        </td>
-                    </tr>
-                </table>
-            </a>
-        </th:block>
-
+        <div class="tags">
+            <span class="btn-info" th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+            <span class="btn-info" th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+        </div>
     </div>
-
+    <div class="clear"></div>
+    <hr style="height: 50px;">
+    </div>
+</th:block>
 </div>
 
 </body>

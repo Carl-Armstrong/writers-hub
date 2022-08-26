@@ -5,7 +5,7 @@
 <body>
     <div th:replace="fragments :: header-bar"></div>
 
-    <div class="container">
+    <div class="container bg-warning">
         <th:block th:each="chapter : ${chapters}">
             <div class="span8">
                 <div class="col-12">
@@ -34,6 +34,7 @@
                 <hr style="height: 50px;">
             </div>
         </th:block>
+    </div>
 
 
 

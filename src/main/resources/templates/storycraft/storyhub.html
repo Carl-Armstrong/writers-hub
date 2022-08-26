@@ -4,77 +4,135 @@
 <body>
     <div th:replace="fragments :: header-bar"></div>
 
-    <div class="wrapper">
+    <div class="bg-info">
+        <div class="container mb-3">
+            <div class=" text-center mt-5 mb-3 ">
 
-        <form method="post" action="/storycraft/storyhub">
-            <label>Title</label>
-            <span class="error" th:errors="${story.title}"></span>
-            <br>
-            <input th:field="${story.title}" class="text-input">
-            <br>
+                <h1 >Story Hub</h1>
+                <h5>Use this form to create a new story or scroll down to see a list of previously created stories</h5>
 
-            <label th:for="world">World</label>
-            <br>
-            <select name="worldId">
-                <option th:each="world : ${worlds}"
-                        th:text="${world.title}"
-                        th:value="${world.id}"></option>
-            </select>
-            <br>
 
-            <label>Description</label>
-            <span class="error" th:errors="${story.description}"></span>
-            <br>
-            <textarea th:field="${story.description}"></textarea>
-            <br>
+            </div>
 
-            <label th:for="tags">Tags:</label>
-            <br>
-            <th:block th:each="tag : ${tags}">
-                <input type="checkbox" name="tags" th:value="${tag.id}">
-                <label th:text="${tag.name}"></label>
-            </th:block>
-            <br>
-            <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
 
-            <br><br>
-            <input type="submit" value="Create New Story" class="form-button">
-        </form>
+            <div class="row ">
+                <div class="col-lg-7 mx-auto">
+                    <div class="card mt-2 mx-auto p-4 bg-light">
+                        <div class="card-body bg-light">
 
+                            <div class = "container">
+                                <form id="contact-form" role="form" method="post" action="/storycraft/storyhub">
+
+
+
+                                    <div class="controls">
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="form_name">World Name</label>
+                                                    <input th:field="${story.title}" id="form_name" type="text" name="name" class="form-control" placeholder="Enter the name of your story" required="required" data-error="World Name is required.">
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="form_message">Description</label>
+                                                    <textarea th:field="${story.description}" id="form_message" name="message" class="form-control" placeholder="Write a description of this story" rows="2"></textarea>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <label>World</label>
+                                                    <select name="worldId">
+                                                        <option th:each="world : ${worlds}"
+                                                                th:text="${world.title}"
+                                                                th:value="${world.id}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Select tags or click 'Add Tags' to create more</label>
+                                                        <div>
+                                                            <th:block th:each="tag : ${tags}">
+                                                                <input type="checkbox" name="tags" th:value="${tag.id}">
+                                                                <label th:text="${tag.name}"></label>
+                                                            </th:block>
+                                                            <br>
+                                                            <a th:href="@{'/tagcraft/add-tag'}">Add Tags</a>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-12 mb-3 pb-3">
+
+                                                <input type="submit" class="btn btn-success btn-send  pt-2 btn-block pb-2
+                            " value="Create Story" style="margin-bottom:20px" >
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- /.8 -->
+
+                </div>
+                <!-- /.row-->
+
+            </div>
+        </div>
     </div>
 
-    <div class="wrapper">
+    <!-- TODO Display number of chapters beside story -->
 
-        <p class="page-title">All Stories</p>
-
-        <div class="main-content">
-
-            <th:block th:each="story : ${stories}">
-                <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
-                    <table class="display-individual-content">
-                        <tr>
-                            <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
-                        </tr>
-                        <tr>
-                            <td th:text="${story.description}" colspan="2" class="description"></td>
-                        </tr>
-                        <tr>
-                            <td class="left-cell">World:</td>
-                            <td th:text="${story.world.title}"></td>
-                        </tr>
-                        <tr>
-                            <td class="left-cell">Tags:</td>
-                            <td>
-                                <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            </td>
-                        </tr>
-                    </table>
-                </a>
-
-            </th:block>
-
+    <!-- List Section-->
+    <div class="container bg-warning">
+        <div class=" text-center mt-5 mb-3 ">
+            <h2 >All Stories:</h2>
+            <h5>Click on any story to see all chapters in it</h5>
         </div>
 
+        <th:block th:each="story : ${stories}">
+            <div class="span8">
+                <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
+                    <h1 th:text="${story.title}">Default world name</h1>
+                    <p th:text="${story.description}">Default world description</p>
+                </a>
+
+                <hr>
+                <div>
+                    <p th:text="'World:   ' + ${story.world.title}">If you can see this paragraph, something messed up.</p>
+                </div>
+
+                <div class="tags">
+                    <span class="btn-info" th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <hr style="height: 50px;">
     </div>
+    </th:block>
+    </div>
+
+
 </body>
 </html>
