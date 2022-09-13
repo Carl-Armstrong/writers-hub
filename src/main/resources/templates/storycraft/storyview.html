@@ -4,41 +4,35 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
-<div class="wrapper">
+<!-- TODO Header should be set in a separate element-->
+<!-- TODO Title should be a different color or otherwise distinguishable from default text-->
+<!-- TODO Every other entry should be a different color to more easily distinguish them as separate items -->
 
-    <p th:text="${story.title}" class="page-title"></p>
-
-    <div class="main-content">
-
-        <th:block th:each="chapter : ${story.chapterList}">
-            <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
-                <table class="display-individual-content">
-                    <tr>
-                        <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${chapter.description}" colspan="2" class="description"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">World:</td>
-                        <td th:text="${chapter.story.world.title}"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">Story:</td>
-                        <td th:text="${chapter.story.title}"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">Tags:</td>
-                        <td>
-                            <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            <span th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            <span th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                        </td>
-                    </tr>
-                </table>
-            </a>
-        </th:block>
+<div class="container bg-warning">
+    <div class=" text-center mt-5 mb-3 ">
+        <h2 th:text="'List of Chapters set in ' + ${story.title} + ':' ">All Chapters:</h2>
+        <h5>Click on any chapter to read</h5>
     </div>
+
+    <th:block th:each="chapter : ${story.chapterList}">
+        <div class="span8">
+            <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
+                <h1 th:text="${chapter.title}">Default chapter name</h1>
+                <p th:text="${chapter.description}">Default chapter description</p>
+            </a>
+
+            <div class="tags">
+                <span class="btn-info" th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                <span class="btn-info" th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                <span class="btn-info" th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+
+        <hr style="height: 50px;">
+    </th:block>
+
 </div>
 
 </body>

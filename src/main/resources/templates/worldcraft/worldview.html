@@ -2,30 +2,35 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
 <body>
-<div th:replace="fragments :: header-bar"></div>
-<div class="container bg-warning">
-<div class=" text-center mt-5 mb-3 ">
-    <h2 th:text="'List of Stories set in ' + ${world.title} + ':' ">All Worlds:</h2>
-    <h5>Click on any story to see all chapters</h5>
-</div>
 
-<th:block th:each="story : ${world.storyList}">
-    <div class="span8">
-        <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
-            <h1 th:text="${story.title}">Default story name</h1>
-            <p th:text="${story.description}">Default story description</p>
-        </a>
+    <div th:replace="fragments :: header-bar"></div>
 
-        <div class="tags">
-            <span class="btn-info" th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-            <span class="btn-info" th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+    <!-- TODO Allow user to create stories from worldview page -->
+    <div class="container bg-warning">
+        <div class=" text-center mt-5 mb-3 ">
+            <h2 th:text="'List of Stories set in ' + ${world.title} + ':' ">All Worlds:</h2>
+            <h5>Click on any story to see all chapters</h5>
         </div>
+
+        <th:block th:each="story : ${world.storyList}">
+            <div class="span8">
+                <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
+                    <h1 th:text="${story.title}">Default story name</h1>
+                    <p th:text="${story.description}">Default story description</p>
+                </a>
+
+                <div class="tags">
+                    <span class="btn-info" th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    <span class="btn-info" th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                </div>
+            </div>
+
+            <div class="clear"></div>
+
+            <hr style="height: 50px;">
+        </th:block>
+
     </div>
-    <div class="clear"></div>
-    <hr style="height: 50px;">
-    </div>
-</th:block>
-</div>
 
 </body>
 </html>
