@@ -5,25 +5,87 @@
 <body>
 
 <div th:replace="fragments :: header-bar"></div>
-<p class="page-title">Create Tag</p>
 
-<form method="post" action="/tagcraft/add-tag">
 
-    <label th:for="name"></label>
-    <span class="error" th:errors="${tag.name}"></span>
-    <br>
-    <input th:field="${tag.name}" type="text" class="text-input" />
+<div class="bg-info">
+    <div class="container mb-3">
+        <div class=" text-center mt-5 mb-3 ">
 
-    <input type="submit" value="Add Tag" class="hub-button">
-</form>
+            <h1 >Create Tag</h1>
+            <h5>Use this form to create a new tag. Scroll down to see a list of previously created tags</h5>
 
-<hr>
 
-<ul>
+        </div>
+
+
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
+
+                        <div class = "container">
+                            <form id="contact-form" role="form" method="post" action="/tagcraft/add-tag">
+
+
+
+                                <div class="controls">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span class="error" th:errors="${tag.name}"></span>
+                                                <label for="form_name">Tag</label>
+                                                <input th:field="${tag.name}" id="form_name" type="text" name="name" class="form-control" placeholder="Enter your tag" required="required" data-error="Story Name is required.">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                        <div class="col-md-12 mb-3 pb-3">
+
+                                            <input type="submit" class="btn btn-success btn-send  pt-2 btn-block pb-2
+                            " value="Create Tag" style="margin-bottom:20px" >
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.8 -->
+
+            </div>
+            <!-- /.row-->
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- List Section-->
+<div class="container bg-warning">
+    <div class=" text-center mt-5 mb-3 ">
+        <h2 >All Tags:</h2>
+    </div>
+
     <th:block th:each="tag : ${tags}">
-        <li th:text="${tag.name}"></li>
-    </th:block>
-</ul>
+        <div class="span8">
+            <li th:text="${tag.name}"></li>
+
+        </div>
+
+</div>
+</th:block>
+</div>
 
 </body>
 </html>

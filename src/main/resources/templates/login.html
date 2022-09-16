@@ -4,25 +4,82 @@
 </head>
 <body>
 
-<form method="post">
-    <div>
-        <label th:for="username">Username
-            <input th:field="${loginFormDTO.username}">
-        </label>
-        <p class="error" th:errors="${loginFormDTO.username}"></p>
+<div th:replace="fragments :: header-bar"></div>
+
+
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Log in Form</h3>
+                        <form method="post">
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <input th:field="${loginFormDTO.username}" type="text" id="userName" class="form-control form-control-lg" />
+                                        <label class="form-label" for="userName">User Name</label>
+                                        <p class="alert alert-danger" th:errors="${loginFormDTO.username}"></p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <input th:field="${loginFormDTO.password}" type="password" id="password" class="form-control form-control-lg" />
+                                        <label class="form-label" for="password">Password</label>
+                                        <i class="bi bi-eye-slash"
+                                           id="togglePassword"></i>
+                                        <p class="alert alert-danger" th:errors="${loginFormDTO.password}"></p>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="mt-4 pt-2">
+                                <input class="btn btn-primary btn-lg" type="submit" value="Log in" />
+                            </div>
+
+                            <p>Don't have an account? <a href="/register">Click here to register.</a> </p>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+</section>
 
-    <div>
-        <label>Password
-            <input th:field="${loginFormDTO.password}" type="password">
-        </label>
-        <p class="error" th:errors="${loginFormDTO.password}"></p>
-    </div>
+<script>
+        const togglePassword = document
+            .querySelector('#togglePassword');
 
-    <input type="submit" value="Log In" class="hub-button"/>
-</form>
+        const password = document.querySelector('#password');
 
-<p>Don't have an account? <a href="/register">Click here to register.</a> </p>
+        togglePassword.addEventListener('click', () => {
+
+            // Toggle the type attribute using
+            // getAttribure() method
+            const type = password
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+
+            password.setAttribute('type', type);
+
+            // Toggle the eye and bi-eye icon
+            this.classList.toggle('bi-eye');
+        });
+    </script>
 
 </body>
 </html>

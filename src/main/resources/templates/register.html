@@ -4,30 +4,95 @@
 </head>
 <body>
 
-    <form method="post">
-        <div>
-            <label>Username
-                <input th:field="${registerFormDTO.username}" class="text-input" />
-            </label>
-            <p class="error" th:errors="${registerFormDTO.username}"></p>
+<div th:replace="fragments :: header-bar"></div>
+
+
+
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+            <div class="row justify-content-center align-items-center h-100">
+                <div class="col-12 col-lg-9 col-xl-7">
+                    <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Registration Form</h3>
+                            <form method="post">
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input th:field="${registerFormDTO.username}" type="text" id="userName" class="form-control form-control-lg" />
+                                            <label class="form-label" for="userName">User Name</label>
+                                            <p class="alert alert-danger" th:errors="${registerFormDTO.username}"></p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input th:field="${registerFormDTO.password}" type="password" id="password" class="form-control form-control-lg" />
+                                            <label class="form-label" for="password">Password</label>
+                                            <i class="bi bi-eye-slash"
+                                               id="togglePassword"></i>
+                                            <p class="alert alert-danger" th:errors="${registerFormDTO.password}"></p>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+
+                                        <div class="form-outline">
+                                            <input th:field="${registerFormDTO.verifyPassword}" type="password" id="verifyPassword" class="form-control form-control-lg" />
+                                            <label class="form-label" for="verifyPassword">Verify Password</label>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="mt-4 pt-2">
+                                    <input class="btn btn-primary btn-lg" type="submit" value="Register" />
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div>
-            <label>Password
-                <input th:field="${registerFormDTO.password}" type="password" class="text-input" />
-            </label>
-            <p class="error" th:errors="${registerFormDTO.password}"></p>
-        </div>
+<script>
+        const togglePassword = document
+            .querySelector('#togglePassword');
 
-        <div>
-            <label>Verify Password
-                <input th:field="${registerFormDTO.verifyPassword}" type="password" class="text-input" />
-            </label>
-        </div>
+        const password = document.querySelector('#password');
 
-        <input type="submit" value="Register" class="form-button"/>
+        togglePassword.addEventListener('click', () => {
 
-    </form>
+            // Toggle the type attribute using
+            // getAttribute() method
+            const type = password
+                .getAttribute('type') === 'password' ?
+                'text' : 'password';
+
+            password.setAttribute('type', type);
+            verifyPassword.setAttribute('type', type);
+
+            // Toggle the eye and bi-eye icon
+            this.classList.toggle('bi-eye');
+        });
+    </script>
+
+
 
 </body>
 </html>

@@ -5,38 +5,116 @@
 <body>
 <div th:replace="fragments :: header-bar"></div>
 
-<form action="/search" method="post">
-    <h2>Search by:</h2>
 
-    <p>
-        <span th:each="type : ${types}">
-            <input
-                    type="radio"
-                    name="searchType"
-                    th:id="${type.key}"
-                    th:value="${type.key}"
-                    th:checked="${type.key == 'title'}" />
-            <label th:for="${type.key}" th:text="${type.value}"></label>
-        </span>
-    </p>
+<div class="bg-info">
+    <div class="container mb-3">
+        <div class=" text-center mt-5 mb-3 ">
 
-    <p>
-        <label for="searchTerm">Keyword:</label>
-        <input type="text" name="searchTerm" id="searchTerm" class="text-input" />
-    </p>
+            <h1 >Search:</h1>
+        </div>
 
-    <input type="submit" value="Search" class="hub-button" />
-</form>
 
-<hr />
+        <div class="row ">
+            <div class="col-lg-7 mx-auto">
+                <div class="card mt-2 mx-auto p-4 bg-light">
+                    <div class="card-body bg-light">
 
-<ul>
+                        <div class = "container">
+                            <form action="/search" method="post">
+
+
+
+                                <div class="controls">
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <span th:each="type : ${types}">
+                                                    <input
+                                                        type="radio"
+                                                        name="searchType"
+                                                        th:id="${type.key}"
+                                                        th:value="${type.key}"
+                                                        th:checked="${type.key == 'title'}" />
+                                                    <label th:for="${type.key}" th:text="${type.value}"></label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="searchTerm">Search Term</label>
+                                                <input id="searchTerm" name="searchTerm" class="form-control" placeholder="Enter your search term" rows="2"></input>
+                                            </div>
+
+                                        </div>
+
+
+
+
+
+                                        <div class="col-md-12 mb-3 pb-3">
+
+                                            <input type="submit" class="btn btn-success btn-send  pt-2 btn-block pb-2
+                                            " value="Search" style="margin-bottom:20px" >
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- /.8 -->
+
+            </div>
+            <!-- /.row-->
+
+        </div>
+    </div>
+</div>
+
+<div class="container bg-warning">
+    <div class=" text-center mt-5 mb-3 ">
+        <h2 >Results:</h2>
+        <h5>Click on any post to view it</h5>
+    </div>
     <th:block th:each="chapter : ${chapters}">
-        <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
-            <li class="title_in_list" th:text="${chapter.title}"></li>
-        </a>
+        <div class="span8">
+            <div class="col-12">
+                <img loading="lazy" th:src="@{/images/WHLogo.jpg}" class="img-fluid" alt="post-thumb"
+                     style="width: 400px; height: 150px;"/>
+            </div>
+            <a th:href="@{'/postcraft/postview/' + ${chapter.id}}">
+                <h1 th:text="${chapter.title}">Default post name</h1>
+                <p th:text="${chapter.description}">Default post description</p>
+            </a>
+
+            <div>
+                <hr>
+                <div>
+                    <p th:text="'World:   ' + ${chapter.story.world.title}">If you can see this paragraph, something messed up.</p>
+                    <p th:text="'Story:   ' + ${chapter.story.title}">If you can see this paragraph, something messed up.</p>
+                </div>
+
+                <div class="tags">
+                    <span class="btn-info" th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    <span class="btn-info" th:each="tag : ${chapter.story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                    <span class="btn-info" th:each="tag : ${chapter.story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <hr style="height: 50px;">
+        </div>
     </th:block>
-</ul>
+</div>
 
 </body>
 </html>
