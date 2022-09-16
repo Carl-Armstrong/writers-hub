@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+    <form method="post" th:action="@{/createspace/storyscape/storybreaker/}">
+        <input type="hidden" th:value="${story.id}" name="storyId"/>
+        <label>Title</label>
+        <span class="error" th:errors="${story.title}"></span>
+        <br>
+        <input th:field="${story.title}" class="text-input">
+        <br>
+
+        <label th:for="world">Story</label>
+        <br>
+        <select name="worldId">
+            <option th:each="world : ${worlds}"
+                    th:text="${world.title}"
+                    th:value="${world.id}"></option>
+        </select>
+        <br>
+
+        <label>Description</label>
+        <span class="error" th:errors="${story.description}"></span>
+        <br>
+        <textarea th:field="${story.description}"></textarea>
+        <br>
+
+        <label th:for="tags">Tags:</label>
+        <br>
+        <th:block th:each="tag : ${tags}">
+            <input type="checkbox" name="tags" th:value="${tag.id}">
+            <label th:text="${tag.name}"></label>
+        </th:block>
+        <br>
+        <a th:href="@{'/createspace/tagscape'}">Add Tags</a>
+
+        <br><br>
+
+        <input type="submit" value="Save Changes" class="form-button">
+    </form>
+
+
+</div>
+
+</body>
+</html>

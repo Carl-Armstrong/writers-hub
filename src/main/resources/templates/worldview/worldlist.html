@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Worldlist</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <th:block th:replace="fragments :: list-of-worlds"></th:block>
+
+</div>
+
+</body>
+</html>

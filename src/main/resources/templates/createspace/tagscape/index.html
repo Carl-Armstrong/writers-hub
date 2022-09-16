@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <form method="post" action="/createspace/tagscape">
+
+        <label th:for="name"></label>
+        <span class="error" th:errors="${tag.name}"></span>
+        <br>
+        <input th:field="${tag.name}" type="text" class="text-input" />
+
+        <input type="submit" value="Add Tag" class="hub-button">
+    </form>
+
+    <hr>
+
+    <ul>
+        <th:block th:each="tag : ${tags}">
+            <li th:text="${tag.name}"></li>
+        </th:block>
+    </ul>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Create Space</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <table>
+        <tr>
+            <td>
+                <form method="get" th:action="@{/createspace/chapterscape}">
+                    <input type="submit" value="Chapterhub" class="hub-button">
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{/createspace/storyscape}">
+                    <input type="submit" value="Storyhub" class="hub-button">
+                </form>
+            </td>
+            <td>
+                <form method="get" th:action="@{/createspace/worldscape}">
+                    <input type="submit" value="Worldhub" class="hub-button">
+                </form>
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

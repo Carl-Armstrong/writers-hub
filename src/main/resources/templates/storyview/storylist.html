@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Story List</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <th:block th:replace="fragments :: list-of-stories"></th:block>
+
+</div>
+
+</body>
+</html>

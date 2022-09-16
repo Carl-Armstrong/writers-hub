@@ -1,3 +1,8 @@
+:root {
+    --main-color: deepskyblue;
+    --highlight-color: #1565c0;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +24,7 @@
     margin: 0;
     height: 25 px;
     font-size: 95%;
-    background-color: deepskyblue;
+    background-color: var(--main-color);
 }
 
 .header-bar a {
@@ -33,7 +38,7 @@
 }
 
 .header-bar a:hover {
-    background: #1565c0;
+    background: var(--highlight-color);
 }
 
 .text-input {
@@ -64,7 +69,7 @@ textarea {
 
 .form-button {
     width: 50%;
-    background-color: deepskyblue;
+    background-color: var(--main-color);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -74,11 +79,11 @@ textarea {
 }
 
 .form-button:hover {
-    background-color: #1565c0;
+    background-color: var(--highlight-color);
 }
 
 hr {
-    border: 2px solid deepskyblue;
+    border: 2px solid var(--main-color);
 }
 
 .post-textarea {
@@ -124,7 +129,7 @@ select {
     padding-bottom: 10px;
     background-color: GhostWhite;
     border-style: solid;
-    border-color: deepskyblue;
+    border-color: var(--main-color);
     border-width: 2px;
     width: 100%;
 }
@@ -132,12 +137,12 @@ select {
 .wrapper {
     padding: 25px;
     border-style: solid;
-    border-color: deepskyblue;
+    border-color: var(--main-color);
     border-width: 5px;
 }
 
 .spacer {
-    border: 1px solid #1565c0;
+    border: 1px solid var(--highlight-color);
 }
 
 .left-cell {
@@ -159,7 +164,7 @@ select {
 }
 
 .hub-button {
-    background-color: deepskyblue;
+    background-color: var(--main-color);
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -169,7 +174,7 @@ select {
 }
 
 .hub-button:hover {
-    background-color: #1565c0;
+    background-color: var(--highlight-color);
 }
 
 .formatted-text {
@@ -181,7 +186,7 @@ select {
     padding-bottom: 10px;
     background-color: GhostWhite;
     border-style: solid;
-    border-color: deepskyblue;
+    border-color: var(--main-color);
     border-width: 2px;
     width: 100%;
 }

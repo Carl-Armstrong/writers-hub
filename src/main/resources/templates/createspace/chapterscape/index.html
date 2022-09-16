@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>All Chapters</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <a href="/createspace/chapterscape/chapterbuilder">Create New Post</a>
+
+    <th:block th:each="chapter : ${chapters}">
+
+        <table class="display-individual-content">
+
+            <tr>
+                <td class="title_in_list" th:text="${chapter.title}" colspan="2"></td>
+            </tr>
+
+            <tr>
+                <td th:text="${chapter.description}" colspan="2" class="description"></td>
+            </tr>
+            <tr>
+                <td class="left-cell">World:</td>
+                <td th:text="${chapter.story.world.title}"></td>
+            </tr>
+            <tr>
+                <td class="left-cell">Story:</td>
+                <td th:text="${chapter.story.title}"></td>
+            </tr>
+            <tr>
+                <td class="left-cell">Tags:</td>
+                <td>
+                    <span th:each="tag : ${chapter.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                <form method="get" th:action="@{'/chapterview/chapterviewer/' + ${chapter.id}}">
+                                    <input type="submit" value="View Post" class="hub-button">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="get" th:action="@{'/createspace/chapterscape/chapterbreaker/' + ${chapter.id}}">
+                                    <input type="submit" value="Edit" class="hub-button">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" action="/createspace/chapterscape">
+                                    <input type="hidden" name="buttonFunction" value="delete">
+                                    <input type="hidden" name="chapterId" th:value="${chapter.id}">
+                                    <input type="submit" value="Delete" class="hub-button">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </th:block>
+
+</div>
+
+</body>
+</html>

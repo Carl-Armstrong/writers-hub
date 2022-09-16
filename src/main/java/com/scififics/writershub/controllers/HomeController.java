@@ -23,6 +23,7 @@ public class HomeController {
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("chapters", chapterRepository.findAll());
+        model.addAttribute("pageTitle", "Writer's Hub");
         return "index";
     }
 
