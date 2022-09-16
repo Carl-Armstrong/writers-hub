@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Page Title</title>
+</head>
+<body>
+<div class="main-content" layout:fragment="content">
+
+    <a href="/createspace/storyscape/storybuilder">Create New Post</a>
+
+    <th:block th:each="story : ${stories}">
+
+        <table class="display-individual-content">
+
+            <tr>
+                <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
+            </tr>
+
+            <tr>
+                <td th:text="${story.description}" colspan="2" class="description"></td>
+            </tr>
+            <tr>
+                <td class="left-cell">World:</td>
+                <td th:text="${story.world.title}"></td>
+            </tr>
+            <tr>
+                <td class="left-cell">Tags:</td>
+                <td>
+                    <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                <form method="get" th:action="@{'/storyview/storyviewer/' + ${story.id}}">
+                                    <input type="submit" value="View Story" class="hub-button">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="get" th:action="@{'/createspace/storyscape/storybreaker/' + ${story.id}}">
+                                    <input type="submit" value="Edit" class="hub-button">
+                                </form>
+                            </td>
+                            <td>
+                                <form method="post" action="/createspace/storyscape">
+                                    <input type="hidden" name="buttonFunction" value="delete">
+                                    <input type="hidden" name="storyId" th:value="${story.id}">
+                                    <input type="submit" value="Delete" class="hub-button">
+                                </form>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </th:block>
+
+</div>
+
+</body>
+</html>

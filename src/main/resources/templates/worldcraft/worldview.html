@@ -10,29 +10,7 @@
 
     <div class="main-content">
 
-        <th:block th:each="story : ${world.storyList}">
-            <a th:href="@{'/storycraft/storyview/' + ${story.id}}">
-                <table class="display-individual-content">
-                    <tr>
-                        <td class="title_in_list" th:text="${story.title}" colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${story.description}" colspan="2" class="description"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">World:</td>
-                        <td th:text="${story.world.title}"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">Tags:</td>
-                        <td>
-                            <span th:each="tag : ${story.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                            <span th:each="tag : ${story.world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                        </td>
-                    </tr>
-                </table>
-            </a>
-        </th:block>
+        <th:block th:replace="fragments :: individual-world"></th:block>
 
     </div>
 

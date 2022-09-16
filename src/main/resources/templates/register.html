@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{mainlayout.html}">
+<head>
+    <title>Register</title>
 </head>
 <body>
+<div class="main-content" layout:fragment="content">
 
     <form method="post">
         <div>
@@ -25,9 +29,11 @@
             </label>
         </div>
 
-        <input type="submit" value="Register" class="form-button"/>
+        <input type="submit" value="Register" class="hub-button"/>
 
     </form>
+
+</div>
 
 </body>
 </html>

@@ -3,14 +3,14 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{mainlayout.html}">
 <head>
-    <title>Home</title>
+    <title>Story List</title>
 </head>
 <body>
-        <div class="main-content" layout:fragment="content">
+<div class="main-content" layout:fragment="content">
 
-            <th:block th:replace="fragments :: list-of-chapters"></th:block>
+    <th:block th:replace="fragments :: list-of-stories"></th:block>
 
-        </div>
+</div>
 
 </body>
 </html>

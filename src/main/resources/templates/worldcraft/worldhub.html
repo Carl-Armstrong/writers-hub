@@ -40,24 +40,7 @@
 
     <div class="main-content">
 
-        <th:block th:each="world : ${worlds}">
-            <a th:href="@{'/worldcraft/worldview/' + ${world.id}}">
-                <table class="display-individual-content">
-                    <tr>
-                        <td class="title_in_list" th:text="${world.title}" colspan="2"></td>
-                    </tr>
-                    <tr>
-                        <td th:text="${world.description}" colspan="2" class="description"></td>
-                    </tr>
-                    <tr>
-                        <td class="left-cell">Tags:</td>
-                        <td>
-                            <span th:each="tag : ${world.tags}" th:text="'#' + ${tag.name} + ' '"></span>
-                        </td>
-                    </tr>
-                </table>
-            </a>
-        </th:block>
+        <th:block th:replace="fragments :: list-of-worlds"></th:block>
 
     </div>
 

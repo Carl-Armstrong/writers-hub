@@ -14,29 +14,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("tagcraft")
-public class TagController {
+@RequestMapping("createspace/tagscape")
+public class TagscapeController {
 
     @Autowired
     private TagRepository tagRepository;
 
-    @GetMapping("add-tag")
+    @GetMapping("")
     public String displayAddTagForm(Model model) {
         model.addAttribute(new Tag());
         model.addAttribute("tags", tagRepository.findAll());
-        return "tagcraft/add-tag";
+        model.addAttribute("pageTitle", "Tag Hub");
+        return "createspace/tagscape/index";
     }
 
-    @PostMapping("add-tag")
+    @PostMapping("")
     public String processAddTagForm(@ModelAttribute @Valid Tag newTag,
                                     Errors errors, Model model) {
 
         if (errors.hasErrors()) {
-            return "tagcraft/add-tag";
+            return "createspace/tagscape/index";
         }
 
         tagRepository.save(newTag);
-        return "redirect:../tagcraft/add-tag";
+        return "redirect:../createspace/tagscape";
     }
-
 }

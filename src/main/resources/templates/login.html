@@ -1,28 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head th:replace="fragments :: head">
+<html lang="en" xmlns:th="http://www.thymeleaf.org/"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{mainlayout.html}">
+<head>
+    <title>Log in</title>
 </head>
 <body>
+<div class="main-content" layout:fragment="content">
 
-<form method="post">
-    <div>
-        <label th:for="username">Username
-            <input th:field="${loginFormDTO.username}">
-        </label>
-        <p class="error" th:errors="${loginFormDTO.username}"></p>
-    </div>
+    <form method="post">
+        <div>
+            <label th:for="username">Username
+                <input th:field="${loginFormDTO.username}">
+            </label>
+            <p class="error" th:errors="${loginFormDTO.username}"></p>
+        </div>
 
-    <div>
-        <label>Password
-            <input th:field="${loginFormDTO.password}" type="password">
-        </label>
-        <p class="error" th:errors="${loginFormDTO.password}"></p>
-    </div>
+        <div>
+            <label>Password
+                <input th:field="${loginFormDTO.password}" type="password">
+            </label>
+            <p class="error" th:errors="${loginFormDTO.password}"></p>
+        </div>
 
-    <input type="submit" value="Log In" class="hub-button"/>
-</form>
+        <input type="submit" value="Log In" class="hub-button"/>
+    </form>
 
-<p>Don't have an account? <a href="/register">Click here to register.</a> </p>
+    <p>Don't have an account? <a href="/register">Click here to register.</a> </p>
+
+</div>
 
 </body>
 </html>
